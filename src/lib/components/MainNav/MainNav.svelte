@@ -7,7 +7,7 @@
 <nav class="main-nav">
     <h1 class="nav__heading">ΘpΛcc</h1>
 
-    <div class="flex-group--1-25">
+    <div class="flex-group--1-25 flex--align-center">
         <Button onclick={() => null} style="button--outline">Log in</Button>
         <Button onclick={() => null}>Sign up</Button>
         <Themer />

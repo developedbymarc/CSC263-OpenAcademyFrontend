@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+a {
+    font-weight: bold;
+    color: var(--text);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+        color: var(--accent);
+        text-decoration: var(--link-underline-thickness) solid underline;
+    }
+}
+
+.clr-error { color: var(--clr-error); }
+
 :root {
     color-scheme: light;
     @media(prefers-color-scheme: dark) {
@@ -13,12 +27,16 @@
     --outline-focus-thickness: 2px;
     --outline-focus-spacing: 0.25rem;
 
+    /* Anchor options */
+    --link-underline-thickness: 2px;
+
     /* Fonts */
     --ff-base: "Lato", system-ui;
     --fs-nav: 1.75rem;
     --fs-1: 1rem;
     --fs-2: 1.25rem;
     --fs-3: 1.5rem;
+    --fs-big: 3rem;
 
     --fs-button: 0.98rem;
 
@@ -27,6 +45,8 @@
     --bg-overlay: hsl(0 0% 92%);
     --text: hsl(0 0% 0%);
     --accent: hsl(269 64% 55%);
+
+    --clr-error: hsl(352 70% 50%);
 
     /* Navbar */
     --main-nav-border-thickness: 1px;
@@ -39,7 +59,7 @@
 
     /* Button */
     --btn-active-strength: 10;
-    --btn-outline-border-thickness: 2px;
+    --btn-border-thickness: 2px;
     --btn-outline-bg-active-strength: 15;
     --btn-outline-text-active-strength: 5;
     --btn-outline-alpha: 8%;

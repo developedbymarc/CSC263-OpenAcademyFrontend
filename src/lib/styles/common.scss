@@ -12,3 +12,20 @@ $flex-gaps: (
     gap: $gap;
   }
 }
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex--align-center {
+  align-items: center;
+}
+
+.flex--col {
+  flex-direction: column;
+}
