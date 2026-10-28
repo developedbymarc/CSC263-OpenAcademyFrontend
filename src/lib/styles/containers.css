@@ -2,7 +2,7 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto; /* grid-template-rows: 1fr auto; if the navbar is inside main */
     min-block-size: 100svb;
-    gap: 1rem;
+    gap: var(--body-spacing);
 }
 
 .main-container {
@@ -17,4 +17,16 @@ body {
     display: grid;
     place-items: center;
     min-height: 100%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .form-container__inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
 }

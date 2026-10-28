@@ -6,11 +6,13 @@
 </script>
 
 <nav class="main-nav">
-    <h1 class="nav__heading">ΘpΛcc</h1>
+    <h1 class="nav__heading">
+        <a href="{resolve('/')}">ΘpΛcc</a>
+    </h1>
 
-    <div class="flex-group--1-25 flex--align-center">
-        <LinkButton href={resolve("/")} style="button--outline">Log in</LinkButton>
-        <LinkButton href={resolve("/")}>Sign up</LinkButton>
+    <div class="flex flex-gap--1-25 flex--align-center">
+        <LinkButton href={resolve("/auth/login")} style="button--outline">Log in</LinkButton>
+        <LinkButton href={resolve("/auth/signin")}>Sign up</LinkButton>
         <p>|</p>
         <Themer />
     </div>

@@ -55,7 +55,7 @@ select {
 input,
 button,
 a.button {
-    border-radius: var(--border-radius);
+    border-radius: var(--glob-border-radius);
 }
 
 button {

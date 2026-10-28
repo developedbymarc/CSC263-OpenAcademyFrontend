@@ -1,5 +1,4 @@
 a.button {
-    display: inline;
     color: var(--text);
     text-decoration: none;
     cursor: pointer;
@@ -7,10 +6,11 @@ a.button {
 }
 
 .button {
+    font-weight: bold;
     padding: var(--btn-spacing);
     background-color: var(--accent);
     font-size: var(--fs-button);
-    border: var(--btn-border-thickness) solid var(--accent);
+    border: var(--glob-border-thickness) solid var(--accent);
 
     &[data-accent="error"] {
         --accent: var(--clr-error);

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-a {
+a:not(.button, .card) {
     font-weight: bold;
     color: var(--text);
     text-decoration: none;
@@ -13,7 +13,19 @@ a {
     }
 }
 
-.clr-error { color: var(--clr-error); }
+$colors: (
+  "accent": var(--accent),
+  "muted": var(--clr-muted),
+  "error": var(--clr-error),
+  "success": var(--clr-success)
+);
+
+@each $name, $clr in $colors {
+  .clr--#{$name} {
+    color: $clr;
+  }
+}
+
 
 :root {
     color-scheme: light;
@@ -22,7 +34,10 @@ a {
     }
 
     /* Global stylings */
-    --border-radius: 0.5rem;
+    --body-spacing: 2rem;
+    --glob-border-radius: 0.5rem;
+    --glob-border-thickness: 2px;
+    --glob-text-stroke-thickness: 0.5rem;
     
     /* Components */
         /* Outline */
@@ -37,15 +52,30 @@ a {
         
         /* Navbar */
         --main-nav-border-thickness: 1px;
+        --main-nav-spacing: 0.75em 2.5em;
+        --main-nav-margin: 1em;
         
         /* Button */
+        --btn-spacing: 0.5em 1.25em;
         --btn-active-strength: 10;
         --btn-border-thickness: 2px;
         --btn-outline-bg-active-strength: 15;
         --btn-outline-text-active-strength: 5;
         --btn-outline-alpha: 8%;
         --btn-outline-alpha-active: 25%;
-        
+
+        /* Card */
+        --card-spacing: 1em;
+        --card-spacing-medium: 1.5em;
+        --card-spacing-large: 3em;
+        --card-border-thickness: 1px;
+        --card-clr-border: hsl(0 0% 82%);
+
+        /* Input */
+        --fs-inpt-label: 1rem;
+        --fs-inpt-value: 1.125rem;
+        --inpt-spacing: 0.6em 1em;
+        --inpt-bg-error-alpha: 0.085;
         
     /* Fonts */
     --ff-base: "Lato", system-ui;
@@ -62,14 +92,13 @@ a {
     --bg-overlay: hsl(0 0% 92%);
     --text: hsl(0 0% 0%);
     --accent: hsl(269 64% 55%);
-
+    
+    --clr-muted: hsl(0 0% 75%);
     --clr-error: hsl(352 70% 50%);
+    --clr-success: hsl(110 70% 50%);
 
 
     /* Spacings */
-    --main-nav-spacing: 0.75em 2.5em;
-    --main-nav-margin: 1em;
-    --btn-spacing: 0.5em 1.25em;
     --select-inpt-spacing: 0.35em 0.75em;
 
 }
@@ -85,6 +114,10 @@ a {
     --bg-overlay: hsl(0 0% 15%);
     --text: hsl(0 0% 100%);
     --accent: hsl(269 64% 55%);
+
+    --clr-muted: hsl(0 0% 30%);
+
+    --card-clr-border: hsl(0 0% 15%);
 
     --btn-outline-bg-active-strength: 30;
     --btn-outline-text-active-strength: 30;

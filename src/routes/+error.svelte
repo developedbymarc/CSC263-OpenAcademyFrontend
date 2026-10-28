@@ -1,5 +1,5 @@
 <script>
-	import RootError from "#lib/components/RootError/RootError.svelte";
+	import RootError from "#lib/Pages/RootError/RootError.svelte";
 </script>
 
 <RootError />
