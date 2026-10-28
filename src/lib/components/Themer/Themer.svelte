@@ -18,6 +18,6 @@
 
 <style>
     #theme-input {
-        padding: 0.35em 0.75em;
+        padding: var(--select-inpt-spacing);
     }
 </style>

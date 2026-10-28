@@ -21,7 +21,7 @@
         align-items: center;
         
         /* background-color: var(--bg-overlay); */
-        border-block-end: 2px solid var(--bg-overlay);
+        border-block-end: var(--main-nav-border-thickness) solid var(--bg-overlay);
         padding: var(--main-nav-spacing);
         margin-inline: var(--main-nav-margin);
 
