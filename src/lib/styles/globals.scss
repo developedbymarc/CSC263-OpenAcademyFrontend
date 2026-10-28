@@ -38,6 +38,8 @@ $colors: (
     --glob-border-radius: 0.5rem;
     --glob-border-thickness: 2px;
     --glob-text-stroke-thickness: 0.5rem;
+    --glob-theme-border-brightness: -15;
+    --glob-theme-border-alpha: 0.35;
     
     /* Components */
         /* Outline */
@@ -114,6 +116,10 @@ $colors: (
 
 :root:has([data-theme="dark"]) {
     color-scheme: dark;
+
+    // Global stylings
+    --glob-theme-border-brightness: 15;
+    --glob-theme-border-alpha: 0.35;
 
     --bg: hsl(0 0% 8%);
     --bg-overlay: hsl(0 0% 13%);

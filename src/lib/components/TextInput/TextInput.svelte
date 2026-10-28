@@ -51,7 +51,7 @@
             border: 
                 var(--glob-border-thickness)
                 solid 
-                hsl(from var(--m-state) h s calc(l + var(--inpt-border-brightness)) / var(--inpt-border-alpha));
+                hsl(from var(--m-state) h s calc(l + var(--glob-theme-border-brightness)) / var(--glob-theme-border-alpha));
             
             &:focus-visible { border-color: var(--accent); }
             &:user-invalid { 
