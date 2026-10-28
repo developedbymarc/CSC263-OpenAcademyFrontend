@@ -1,0 +1,32 @@
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* grid-template-rows: 1fr auto; if the navbar is inside main */
+    min-block-size: 100svb;
+    gap: var(--body-spacing);
+}
+
+.main-container {
+    container: main / inline-size;
+    inline-size: 100%;
+    max-inline-size: 2000px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.error-container {
+    display: grid;
+    place-items: center;
+    min-height: 100%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .form-container__inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}

@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+a:not(.button, .card) {
+    font-weight: bold;
+    color: currentColor;
+    text-decoration: none;
+
+    &[data-active="true"],
+    &:hover,
+    &:focus-visible {
+        color: var(--accent);
+        text-decoration: var(--link-underline-thickness) solid underline;
+    }
+}
+
+$colors: (
+  "accent": var(--accent),
+  "muted": var(--clr-muted),
+  "error": var(--clr-error),
+  "success": var(--clr-success)
+);
+
+@each $name, $clr in $colors {
+  .clr--#{$name} {
+    color: $clr;
+  }
+}
+
+
+:root {
+    color-scheme: light;
+    @media(prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
+
+    /* Global stylings */
+    --body-spacing: 2rem;
+    --glob-border-radius: 0.5rem;
+    --glob-border-thickness: 2px;
+    --glob-text-stroke-thickness: 0.5rem;
+    --glob-theme-border-brightness: -15;
+    --glob-theme-border-alpha: 0.35;
+    
+    /* Components */
+        /* Outline */
+        --outline-focus-thickness: 2px;
+        --outline-focus-spacing: 0.25rem;
+
+        /* Anchor */
+        --link-underline-thickness: 2px;
+        
+        /* Root Error */
+        --root-error-underine-thickness: 0.5rem;
+        
+        /* Navbar */
+        --main-nav-border-thickness: 1px;
+        --main-nav-spacing: 0.75em 2.5em;
+        --main-nav-margin: 1em;
+        
+        /* Button */
+        --btn-spacing: 0.5em 1.25em;
+        --btn-active-strength: 10;
+        --btn-border-thickness: 2px;
+        --btn-outline-bg-active-strength: 15;
+        --btn-outline-text-active-strength: 5;
+        --btn-outline-alpha: 15%;
+        --btn-outline-alpha-active: 42%;
+
+        /* Card */
+        --card-spacing: 1em;
+        --card-spacing-medium: 1.5em;
+        --card-spacing-large: 3em;
+        --card-border-thickness: 1px;
+        --card-clr-border: hsl(0 0% 82%);
+
+        /* Input */
+        --fs-inpt-label: 1rem;
+        --fs-inpt-value: 1.125rem;
+        --fs-inpt-value-nav: 0.9rem;
+        --inpt-gap: 0.2rem;
+        --inpt-spacing: 0.6em 1em;
+        --inpt-error-list-spacing: 1.5rem;
+        --inpt-border-brightness: -15;
+        --inpt-bg-alpha: 0.125;
+        --inpt-border-alpha: 0.35;
+        
+    /* Fonts */
+    --ff-base: "Lato", system-ui;
+    --fs-nav: 1.75rem;
+    --fs-1: 1rem;
+    --fs-2: 1.25rem;
+    --fs-3: 1.5rem;
+    --fs-big: 3rem;
+
+    --fs-button: 0.98rem;
+
+    /* Colors */
+    --bg: hsl(0 0% 100%);
+    --bg-overlay: hsl(0 0% 92%);
+    --text: hsl(0 0% 0%);
+    --accent: hsl(269 64% 55%);
+    
+    --clr-muted: hsl(0 0% 75%);
+    --clr-error: hsl(352 70% 50%);
+    --clr-success: hsl(110 70% 50%);
+
+
+    /* Spacings */
+    --select-inpt-spacing: 0.35em 0.75em;
+
+}
+
+:root:has([data-theme="light"]) {
+    color-scheme: light;
+}
+
+:root:has([data-theme="dark"]) {
+    color-scheme: dark;
+
+    // Global stylings
+    --glob-theme-border-brightness: 15;
+    --glob-theme-border-alpha: 0.35;
+
+    --bg: hsl(0 0% 8%);
+    --bg-overlay: hsl(0 0% 13%);
+    --text: hsl(0 0% 100%);
+    --accent: hsl(269 64% 55%);
+
+    --clr-muted: hsl(0 0% 30%);
+
+    --card-clr-border: hsl(0 0% 15%);
+
+    --btn-outline-bg-active-strength: 30;
+    --btn-outline-text-active-strength: 30;
+
+    // Input
+    --inpt-border-brightness: 15;
+    --inpt-bg-alpha: 0.125;
+    --inpt-border-alpha: 0.35;
+}
+
+:root:has([data-theme="gruvbox"]) {
+    --bg: hsl(40 100% 94%);
+    --bg-overlay: hsl(40 90% 88%);
+    --text: hsl(40 41% 15%);
+    --accent: hsl(27 75% 55%);
+}
