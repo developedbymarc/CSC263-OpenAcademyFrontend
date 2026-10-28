@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { ButtonProps } from "#lib/types/components/types.ts";
 
-    let { text, onclick, style }: ButtonProps = $props();
+    let { children, onclick, style }: ButtonProps = $props();
 </script>
 
 <button class="button {style}" {onclick}>
-    {text}
+    {@render children?.()}
 </button>
 
 <style>

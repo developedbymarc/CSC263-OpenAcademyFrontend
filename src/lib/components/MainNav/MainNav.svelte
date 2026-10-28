@@ -1,14 +1,16 @@
 <script>
 	import Button from "../Button/Button.svelte";
+	import Themer from "../Themer/Themer.svelte";
 
 </script>
 
 <nav class="main-nav">
     <h1 class="nav__heading">ΘpΛcc</h1>
 
-    <div class="flex-group--1-5">
-        <Button text="Log in" onclick={() => null} style="button--outline" />
-        <Button text="Sign up" onclick={() => null} />
+    <div class="flex-group--1-25">
+        <Button onclick={() => null} style="button--outline">Log in</Button>
+        <Button onclick={() => null}>Sign up</Button>
+        <Themer />
     </div>
 </nav>
 
@@ -20,8 +22,8 @@
         
         /* background-color: var(--bg-overlay); */
         border-block-end: 2px solid var(--bg-overlay);
-        padding: 1em 2.5em;
-        margin-inline: 2em;
+        padding: var(--main-nav-spacing);
+        margin-inline: var(--main-nav-margin);
 
         .nav__heading { font-size: var(--fs-nav); }
     }

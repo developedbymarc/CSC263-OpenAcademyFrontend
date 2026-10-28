@@ -16,30 +16,49 @@
     --fs-2: 1.25rem;
     --fs-3: 1.5rem;
 
-    --fs-button: 1.125rem;
+    --fs-button: 0.98rem;
 
     /* Colors */
+    --bg: hsl(0 0% 100%);
+    --bg-overlay: hsl(0 0% 92%);
+    --text: hsl(0 0% 0%);
+    --accent: hsl(269 64% 55%);
+
+    --border-radius: 0.5rem;
+
+    /* Spacings */
+    --main-nav-spacing: 0.75em 2.5em;
+    --main-nav-margin: 1em;
+    --btn-spacing: 0.5em 1.25em;
+
+    /* Button */
+    --btn-active-strength: 10;
+    --btn-outline-border-thickness: 2px;
+    --btn-outline-bg-active-strength: 15;
+    --btn-outline-text-active-strength: 5;
+    --btn-outline-alpha: 8%;
+    --btn-outline-alpha-active: 25%;
+}
+
+:root:has([data-theme="light"]) {
+    color-scheme: light;
+}
+
+:root:has([data-theme="dark"]) {
+    color-scheme: dark;
+
     --bg: hsl(0 0% 9%);
     --bg-overlay: hsl(0 0% 15%);
     --text: hsl(0 0% 100%);
     --accent: hsl(269 64% 55%);
 
-    --border-radius: 0.35rem;
-
-    /* Spacings */
-    --btn-spacing: 0.55em 1.125em;
-
-    /* Button */
-    --btn-active-strength: 10;
-    --btn-outline-border-thickness: 3px;
     --btn-outline-bg-active-strength: 30;
     --btn-outline-text-active-strength: 30;
-    --btn-outline-alpha: 15%;
-    --btn-outline-alpha-active: 25%;
 }
 
-:root[data-theme="dark"] {
-    --bg: hsl(0 0% 100%);
-    --text: hsl(0 0% 0%);
-    --accent: hsl(282 67% 51%);
+:root:has([data-theme="gruvbox"]) {
+    --bg: hsl(40 100% 94%);
+    --bg-overlay: hsl(40 90% 82%);
+    --text: hsl(40 41% 15%);
+    --accent: hsl(27 75% 55%);
 }
