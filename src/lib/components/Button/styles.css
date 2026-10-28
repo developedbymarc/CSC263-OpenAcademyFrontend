@@ -1,4 +1,5 @@
 a.button {
+    border-radius: var(--globBorderRadius);
     text-decoration: none;
     cursor: pointer;
     user-select: none;
@@ -6,40 +7,43 @@ a.button {
 
 .button {
     font-weight: bold;
-    padding: var(--btn-spacing);
+    padding: var(--btnMargin);
     background-color: var(--accent);
     color: hsl(from var(--accent) h s 100);
-    font-size: var(--fs-button);
-    border: var(--glob-border-thickness) solid var(--accent);
+    font-size: var(--fsButton);
+    border: var(--globBorderThickness) solid var(--accent);
 
     &[data-accent="error"] {
-        --accent: var(--clr-error);
+        --accent: var(--clrError);
     }
 
     &:hover,
     &:focus-visible {
-        --active-clr: hsl(from var(--accent) h s calc(l + var(--btn-active-strength)));
-        background-color: var(--active-clr);
-        border-color: var(--active-clr);
+        --mActiveClr: hsl(from var(--accent) h s calc(l + var(--btnActiveStrength)));
+        
+        background-color: var(--mActiveClr);
+        border-color: var(--mActiveClr);
 
     }
 }
 
-.button:is(.button--outline) {
-    background-color: hsl(from var(--accent) h s l / var(--btn-outline-alpha));
-    color: hsl(from var(--accent) h s l);
+.button:is(.button-outline) {
+    --mActiveTextClr: hsl(from var(--accent) h s calc(l + var(--btnOutlineTextActiveStrength)));
+    
+    background-color: hsl(from var(--accent) h s l / var(--btnOutlineAlpha));
+    border-color: var(--accent);
+    color: var(--mActiveTextClr);
 
-    &:is(.button--flat) { 
-        color: hsl(from var(--accent) h s calc(l + var(--btn-outline-text-active-strength)));
+    &:is(.button-flat) { 
         border: none; 
     }
 
     &:hover,
     &:focus-visible {
-        color: hsl(from var(--accent) h s calc(l + var(--btn-outline-text-active-strength)));
+        color: var(--mActiveTextClr);
         background-color: hsl(
             from var(--accent) 
-            h s calc(l + var(--btn-outline-bg-active-strength)) / var(--btn-outline-alpha-active)
+            h s calc(l + var(--btnOutlineBgActiveStrength)) / var(--btnOutlineAlphaActive)
         );
     }
 }

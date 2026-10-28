@@ -2,12 +2,12 @@
 	import type { ButtonProps } from "#lib/types/components/types.ts";
     import "./styles.css";
 
-    let { children, onclick, style, accent, ...rest }: ButtonProps = $props();
+    let { children, onclick, class: className, accent, ...rest }: ButtonProps = $props();
 </script>
 
 <button 
     data-accent={accent ?? ""} 
-    class="button {style}" 
+    class="button {className}" 
     {onclick} 
     {...rest}
 >

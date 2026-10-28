@@ -9,6 +9,6 @@
 <style>
     .main-footer {
         padding: 2em;
-        background-color: var(--bg-overlay);
+        background-color: var(--bgOverlay);
     }
 </style>

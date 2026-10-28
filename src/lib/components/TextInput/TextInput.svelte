@@ -12,7 +12,7 @@
         ...rest }: TextInputProps = $props()
 </script>
 
-<div class="inpt-container flex flex--col">
+<div class="inpt-container flex flex-direction-column">
     <label data-hide={hideLabel ?? false} for="{name}-inpt">{label}</label>
     <input id="{name}-inpt" {name} {type} {placeholder} {...rest} bind:value />
     <ul class="inpt-container__errors">
@@ -24,44 +24,43 @@
 
 <style>
     .inpt-container {
-        --m-text-state: var(--text);
+        --mTextState: var(--text);
 
         width: 100%;
-        gap: var(--inpt-gap);
+        gap: var(--inptGap);
 
-        /* &:has(:user-valid) { --m-text-state: var(--clr-success) } */
-        &:has(:user-invalid) { --m-text-state: var(--clr-error) }
+        /* &:has(:user-valid) { --mTextState: var(--clrSuccess) } */
+        &:has(:user-invalid) { --mTextState: var(--clrError) }
 
         label {
-            font-size: var(--fs-inpt-label);
-            color: var(--m-text-state);
+            font-size: var(--fsInptLabel);
+            color: var(--mTextState);
             font-weight: bold;
 
             &[data-hide="true"] { display: none; }
         }
 
         input {
-            --m-state: var(--bg-overlay);
+            --mState: var(--bgOverlay);
+            --mBorderColor: 
+                hsl(from var(--mState) 
+                h s calc(l + var(--globThemeBorderBrightness)) 
+                / var(--globThemeBorderAlpha));
 
-            font-size: var(--fs-inpt-value);
-            background-color: var(--m-state);
-            padding: var(--inpt-spacing);
-            color: var(--m-text-state);
+            font-size: var(--fsInptText);
+            background-color: var(--mState);
+            padding: var(--inptPadding);
+            color: var(--mTextState);
             
-            border: 
-                var(--glob-border-thickness)
-                solid 
-                hsl(from var(--m-state) h s calc(l + var(--glob-theme-border-brightness)) / var(--glob-theme-border-alpha));
+            border: var(--globBorderThickness) solid var(--mBorderColor);
             
             &:focus-visible { border-color: var(--accent); }
-            &:user-invalid { 
-                --m-state: hsl(from var(--clr-error) h s l / var(--inpt-bg-alpha)); 
-            }
+            &:user-invalid { --mState: hsl(from var(--clrError) h s l / var(--inptBgAlpha)); }
         }
 
         .inpt-container__errors {
-            color: var(--clr-error);
-            margin-inline-start: var(--inpt-error-list-spacing);
+            color: var(--clrError);
+            margin-inline-start: var(--inptErrListMargin);
         }
     }
 </style>

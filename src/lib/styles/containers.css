@@ -2,7 +2,7 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto; /* grid-template-rows: 1fr auto; if the navbar is inside main */
     min-block-size: 100svb;
-    gap: var(--body-spacing);
+    gap: var(--globBodySpacing);
 }
 
 .main-container {

@@ -1,25 +1,25 @@
 <script lang="ts">
 	import type { HTMLAttributes } from "svelte/elements";
 
-    let { children, style, ...rest }: HTMLAttributes<HTMLDivElement> = $props();
+    let { children, class: className, ...rest }: HTMLAttributes<HTMLDivElement> = $props();
 </script>
 
-<div class="card {style}" {...rest}>
+<div class="card {className ?? ''}" {...rest}>
     {@render children?.()}
 </div>
 
 <style>
     .card {
-        --m-spacing: var(--card-spacing);
+        --m-spacing: var(--cardSpacing);
 
         padding: var(--m-spacing);
         border: 
-            var(--glob-border-thickness) 
+            var(--globBorderThickness) 
             solid 
-            hsl(from var(--accent) h s calc(l + var(--glob-theme-border-brightness)) / var(--glob-theme-border-alpha));
-        border-radius: var(--glob-border-radius);
+            hsl(from var(--accent) h s calc(l + var(--globThemeBorderBrightness)) / var(--globThemeBorderAlpha));
+        border-radius: var(--globBorderRadius);
 
-        &.card--medium { --m-spacing: var(--card-spacing-medium); }
-        &.card--large { --m-spacing: var(--card-spacing-large); }
+        &.card--medium { --m-spacing: var(--cardSpacingMedium); }
+        &.card--large { --m-spacing: var(--cardSpacingLarge); }
     }
 </style>

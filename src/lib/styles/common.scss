@@ -1,28 +1,72 @@
 $flex-gaps: (
-    "1": 1rem,
-    "1-25": 1.25rem,
-    "1-5": 1.5rem,
-    "1-75": 1.75rem,
-    "2": 2rem
+  "1": 1rem,
+  "1-25": 1.25rem,
+  "1-5": 1.5rem,
+  "1-75": 1.75rem,
+  "2": 2rem
 );
 
 @each $name, $gap in $flex-gaps {
-  .flex-gap--#{$name} {
+  .flex-gap-#{$name} {
     gap: $gap;
   }
 }
 
-.text--center {
-  text-align: center;
+$operator-keys: (
+	align-items,
+	align-content,
+	justify-content,
+	justify-items,
+	justify-self,
+	align-self,
+	place-items,
+	place-content
+);
+
+$operator-values: start, end, center, space-evenly, space-between, space-around;
+
+@each $op in $operator-keys {
+	@each $op-val in $operator-values {
+		.#{$op}-#{$op-val} {
+			#{$op}: #{$op-val};
+		}
+	}
 }
 
-.text--muted {
-  color: var(--clr-muted);
+$box-models: flex-direction;
+$box-values: column, row;
+
+@each $box-model in $box-models {
+	@each $val in $box-values {
+		.#{$box-model}-#{$val} {
+			#{$box-model}: #{$val};
+		}
+	}
 }
 
-.text--stroke {
-  font-size: var(--fs-big);
-  text-decoration: var(--glob-text-stroke-thickness) solid underline;
+$text-alignments: start, center, end;
+
+@each $alignment in $text-alignments {
+	.text-align-#{$alignment} {
+		text-align: #{$alignment};
+	}
+}
+
+.flex { display: flex; }
+.grid { display: grid; }
+
+:is(.flex, .grid)[data-grow='true'] > * {
+	width: 100%;
+}
+
+.flex-wrap { flex-wrap: wrap; }
+.flex-grow-1 { flex-grow: 1; }
+
+.text-center { text-align: center; }
+
+.text-stroke {
+  font-size: var(--fsBig);
+  text-decoration: var(--globTextStrokeThickness) solid underline;
 }
 
 .center {
@@ -30,16 +74,4 @@ $flex-gaps: (
   place-items: center;
   min-width: 50%;
   min-height: 100%;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex--align-center {
-  align-items: center;
-}
-
-.flex--col {
-  flex-direction: column;
 }

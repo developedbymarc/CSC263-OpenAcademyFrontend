@@ -20,6 +20,6 @@
 
 <style>
     #theme-input {
-        padding: var(--select-inpt-spacing);
+        padding: var(--selectInptPadding);
     }
 </style>
