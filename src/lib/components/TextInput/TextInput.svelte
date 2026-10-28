@@ -1,11 +1,19 @@
 <script lang="ts">
 	import type { TextInputProps } from "#lib/types/components/types.ts";
 
-    let { value = $bindable(""), label, type, name, errors, placeholder, ...rest }: TextInputProps = $props()
+    let { 
+        value = $bindable(""), 
+        label, 
+        type, 
+        name, 
+        errors, 
+        placeholder,
+        hideLabel,
+        ...rest }: TextInputProps = $props()
 </script>
 
 <div class="inpt-container flex flex--col">
-    <label for="{name}-inpt">{label}</label>
+    <label data-hide={hideLabel ?? false} for="{name}-inpt">{label}</label>
     <input id="{name}-inpt" {name} {type} {placeholder} {...rest} bind:value />
     <ul class="inpt-container__errors">
         {#each (errors ?? []) as error, idx (idx)}
@@ -17,7 +25,9 @@
 <style>
     .inpt-container {
         --m-text-state: var(--text);
-        gap: 0.2rem;
+
+        width: 100%;
+        gap: var(--inpt-gap);
 
         /* &:has(:user-valid) { --m-text-state: var(--clr-success) } */
         &:has(:user-invalid) { --m-text-state: var(--clr-error) }
@@ -26,30 +36,32 @@
             font-size: var(--fs-inpt-label);
             color: var(--m-text-state);
             font-weight: bold;
+
+            &[data-hide="true"] { display: none; }
         }
 
         input {
-            --m-bg-state: var(--bg-overlay);
-            --m-state: var(--clr-muted);
+            --m-state: var(--bg-overlay);
 
             font-size: var(--fs-inpt-value);
-            background-color: var(--m-bg-state);
+            background-color: var(--m-state);
             padding: var(--inpt-spacing);
             color: var(--m-text-state);
             
-            border: var(--glob-border-thickness) solid var(--m-state, --clr-muted);
+            border: 
+                var(--glob-border-thickness)
+                solid 
+                hsl(from var(--m-state) h s calc(l + var(--inpt-border-brightness)) / var(--inpt-border-alpha));
             
-            /* &:user-valid { --m-state: var(--clr-success); } */
             &:focus-visible { border-color: var(--accent); }
             &:user-invalid { 
-                --m-state: var(--clr-error);
-                --m-bg-state: hsl(from var(--clr-error) h s l / var(--inpt-bg-error-alpha)); 
+                --m-state: hsl(from var(--clr-error) h s l / var(--inpt-bg-alpha)); 
             }
         }
 
         .inpt-container__errors {
             color: var(--clr-error);
-            margin-inline-start: 1.5rem;
+            margin-inline-start: var(--inpt-error-list-spacing);
         }
     }
 </style>

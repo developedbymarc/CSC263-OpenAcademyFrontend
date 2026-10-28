@@ -1,10 +1,14 @@
+<script>
+	import Logo from "../Logo/Logo.svelte";
+
+</script>
 <footer class="main-footer">
-    <h1>ΘpΛcc</h1>
+    <h1><Logo /></h1>
 </footer>
 
 <style>
     .main-footer {
-        padding: 3em;
+        padding: 2em;
         background-color: var(--bg-overlay);
     }
 </style>

@@ -2,7 +2,7 @@
 
 a:not(.button, .card) {
     font-weight: bold;
-    color: var(--text);
+    color: currentColor;
     text-decoration: none;
 
     &[data-active="true"],
@@ -61,8 +61,8 @@ $colors: (
         --btn-border-thickness: 2px;
         --btn-outline-bg-active-strength: 15;
         --btn-outline-text-active-strength: 5;
-        --btn-outline-alpha: 8%;
-        --btn-outline-alpha-active: 25%;
+        --btn-outline-alpha: 15%;
+        --btn-outline-alpha-active: 42%;
 
         /* Card */
         --card-spacing: 1em;
@@ -74,8 +74,13 @@ $colors: (
         /* Input */
         --fs-inpt-label: 1rem;
         --fs-inpt-value: 1.125rem;
+        --fs-inpt-value-nav: 0.9rem;
+        --inpt-gap: 0.2rem;
         --inpt-spacing: 0.6em 1em;
-        --inpt-bg-error-alpha: 0.085;
+        --inpt-error-list-spacing: 1.5rem;
+        --inpt-border-brightness: -15;
+        --inpt-bg-alpha: 0.125;
+        --inpt-border-alpha: 0.35;
         
     /* Fonts */
     --ff-base: "Lato", system-ui;
@@ -110,8 +115,8 @@ $colors: (
 :root:has([data-theme="dark"]) {
     color-scheme: dark;
 
-    --bg: hsl(0 0% 9%);
-    --bg-overlay: hsl(0 0% 15%);
+    --bg: hsl(0 0% 8%);
+    --bg-overlay: hsl(0 0% 13%);
     --text: hsl(0 0% 100%);
     --accent: hsl(269 64% 55%);
 
@@ -121,6 +126,11 @@ $colors: (
 
     --btn-outline-bg-active-strength: 30;
     --btn-outline-text-active-strength: 30;
+
+    // Input
+    --inpt-border-brightness: 15;
+    --inpt-bg-alpha: 0.125;
+    --inpt-border-alpha: 0.35;
 }
 
 :root:has([data-theme="gruvbox"]) {

@@ -1,5 +1,4 @@
 a.button {
-    color: var(--text);
     text-decoration: none;
     cursor: pointer;
     user-select: none;
@@ -9,6 +8,7 @@ a.button {
     font-weight: bold;
     padding: var(--btn-spacing);
     background-color: var(--accent);
+    color: hsl(from var(--accent) h s 100);
     font-size: var(--fs-button);
     border: var(--glob-border-thickness) solid var(--accent);
 
@@ -25,11 +25,12 @@ a.button {
     }
 }
 
-.button--outline {
+.button:is(.button--outline) {
     background-color: hsl(from var(--accent) h s l / var(--btn-outline-alpha));
     color: hsl(from var(--accent) h s l);
 
-    &:where(.button--flat) { 
+    &:is(.button--flat) { 
+        color: hsl(from var(--accent) h s calc(l + var(--btn-outline-text-active-strength)));
         border: none; 
     }
 

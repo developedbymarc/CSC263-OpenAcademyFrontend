@@ -7,5 +7,5 @@ export type ButtonProps = ButtonOnlyProps & HTMLButtonAttributes;
 
 export type LinkButtonProps = ButtonOnlyProps & HTMLAnchorAttributes;
 
-type TextInputOnlyProps = { type: "text" | "password" | "email", label: string, errors?: string[] };
+type TextInputOnlyProps = { type: "text" | "password" | "email", label: string, errors?: string[], hideLabel?: boolean };
 export type TextInputProps = TextInputOnlyProps & HTMLInputAttributes;

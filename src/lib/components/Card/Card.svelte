@@ -13,7 +13,10 @@
         --m-spacing: var(--card-spacing);
 
         padding: var(--m-spacing);
-        border: var(--glob-border-thickness) solid var(--card-clr-border);
+        border: 
+            var(--glob-border-thickness) 
+            solid 
+            hsl(from var(--accent) h s calc(l + var(--inpt-border-brightness)) / var(--inpt-border-alpha));;
         border-radius: var(--glob-border-radius);
 
         &.card--medium { --m-spacing: var(--card-spacing-medium); }

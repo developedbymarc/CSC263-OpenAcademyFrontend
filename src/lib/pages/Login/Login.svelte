@@ -47,7 +47,7 @@
                 <Button type="submit">Login</Button>
                 <p class="text--center">
                     Don't have an account? 
-                    <a href="{resolve('auth/signin')}" data-active="true">Sign up</a>
+                    <a href="{resolve('auth/signup')}" data-active="true">Sign up</a>
                 </p>
             </div>
         </form>
