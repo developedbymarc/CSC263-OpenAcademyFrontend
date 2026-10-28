@@ -53,7 +53,8 @@ select {
 }
 
 input,
-button {
+button,
+a.button {
     border-radius: var(--border-radius);
 }
 

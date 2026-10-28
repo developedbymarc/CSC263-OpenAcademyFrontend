@@ -7,7 +7,9 @@
         document.startViewTransition(() => {
             document.body.dataset["theme"] = theme;
         });
-    }
+    };
+
+    $effect(updateTheme)
 </script>
 
 <select name="theme" id="theme-input" bind:value={theme} onchange={updateTheme}>

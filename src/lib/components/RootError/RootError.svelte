@@ -16,7 +16,7 @@
     .error-container {
         .error-heading__error-code {
             font-size: var(--fs-big);
-            text-decoration: 0.5rem solid underline;
+            text-decoration: var(--root-error-underine-thickness) solid underline;
         }
     }
 </style>

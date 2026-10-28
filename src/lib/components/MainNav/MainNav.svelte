@@ -1,5 +1,6 @@
 <script>
-	import Button from "../Button/Button.svelte";
+	import { resolve } from "$app/paths";
+	import LinkButton from "../Button/LinkButton.svelte";
 	import Themer from "../Themer/Themer.svelte";
 
 </script>
@@ -8,8 +9,8 @@
     <h1 class="nav__heading">ΘpΛcc</h1>
 
     <div class="flex-group--1-25 flex--align-center">
-        <Button onclick={() => null} style="button--outline">Log in</Button>
-        <Button onclick={() => null}>Sign up</Button>
+        <LinkButton href={resolve("/")} style="button--outline">Log in</LinkButton>
+        <LinkButton href={resolve("/")}>Sign up</LinkButton>
         <p>|</p>
         <Themer />
     </div>
