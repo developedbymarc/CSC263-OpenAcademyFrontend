@@ -1,10 +1,15 @@
 <script lang="ts">
 	import type { ButtonProps } from "#lib/types/components/types.ts";
 
-    let { children, onclick, style, ...rest }: ButtonProps = $props();
+    let { children, onclick, style, accent, ...rest }: ButtonProps = $props();
 </script>
 
-<button class="button {style}" {onclick} {...rest}>
+<button 
+    data-accent={accent ?? ""} 
+    class="button {style}" 
+    {onclick} 
+    {...rest}
+>
     {@render children?.()}
 </button>
 

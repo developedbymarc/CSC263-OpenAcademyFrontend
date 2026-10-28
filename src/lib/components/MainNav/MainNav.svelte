@@ -10,6 +10,7 @@
     <div class="flex-group--1-25 flex--align-center">
         <Button onclick={() => null} style="button--outline">Log in</Button>
         <Button onclick={() => null}>Sign up</Button>
+        <p>|</p>
         <Themer />
     </div>
 </nav>

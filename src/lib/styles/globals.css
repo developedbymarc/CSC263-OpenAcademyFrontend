@@ -5,6 +5,7 @@ a {
     color: var(--text);
     text-decoration: none;
 
+    &[data-active="true"],
     &:hover,
     &:focus-visible {
         color: var(--accent);
@@ -22,14 +23,30 @@ a {
 
     /* Global stylings */
     --border-radius: 0.5rem;
+    
+    /* Components */
+        /* Outline */
+        --outline-focus-thickness: 2px;
+        --outline-focus-spacing: 0.25rem;
 
-    /* Outline options */
-    --outline-focus-thickness: 2px;
-    --outline-focus-spacing: 0.25rem;
-
-    /* Anchor options */
-    --link-underline-thickness: 2px;
-
+        /* Anchor */
+        --link-underline-thickness: 2px;
+        
+        /* Root Error */
+        --root-error-underine-thickness: 0.5rem;
+        
+        /* Navbar */
+        --main-nav-border-thickness: 1px;
+        
+        /* Button */
+        --btn-active-strength: 10;
+        --btn-border-thickness: 2px;
+        --btn-outline-bg-active-strength: 15;
+        --btn-outline-text-active-strength: 5;
+        --btn-outline-alpha: 8%;
+        --btn-outline-alpha-active: 25%;
+        
+        
     /* Fonts */
     --ff-base: "Lato", system-ui;
     --fs-nav: 1.75rem;
@@ -48,8 +65,6 @@ a {
 
     --clr-error: hsl(352 70% 50%);
 
-    /* Navbar */
-    --main-nav-border-thickness: 1px;
 
     /* Spacings */
     --main-nav-spacing: 0.75em 2.5em;
@@ -57,13 +72,6 @@ a {
     --btn-spacing: 0.5em 1.25em;
     --select-inpt-spacing: 0.35em 0.75em;
 
-    /* Button */
-    --btn-active-strength: 10;
-    --btn-border-thickness: 2px;
-    --btn-outline-bg-active-strength: 15;
-    --btn-outline-text-active-strength: 5;
-    --btn-outline-alpha: 8%;
-    --btn-outline-alpha-active: 25%;
 }
 
 :root:has([data-theme="light"]) {
