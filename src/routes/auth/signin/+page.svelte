@@ -1,6 +1,7 @@
-<script>
-	import Signup from "#lib/Pages/Signup/Signup.svelte";
+<script lang="ts">
+	import Signup from "#lib/pages/Signup/Signup.svelte";
 
+	let { data } = $props();
 </script>
 
-<Signup />
+<Signup {data} />

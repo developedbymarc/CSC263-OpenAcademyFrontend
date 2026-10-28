@@ -1,6 +1,7 @@
-<script>
-	import Login from "#lib/Pages/Login/Login.svelte";
+<script lang="ts">
+	import Login from "#lib/pages/Login/Login.svelte";
 
+	let { data } = $props();
 </script>
 
-<Login />
+<Login {data} />

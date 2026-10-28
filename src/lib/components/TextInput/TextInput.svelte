@@ -6,7 +6,7 @@
 
 <div class="inpt-container flex flex--col">
     <label for="{name}-inpt">{label}</label>
-    <input id="{name}-inpt" {type} {placeholder} {...rest} bind:value />
+    <input id="{name}-inpt" {name} {type} {placeholder} {...rest} bind:value />
     <ul class="inpt-container__errors">
         {#each (errors ?? []) as error, idx (idx)}
             <li>{error}</li>
