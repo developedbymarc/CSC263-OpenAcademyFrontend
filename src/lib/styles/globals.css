@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+:root {
+    color-scheme: light;
+    @media(prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
+
+    --outline-focus-thickness: 2px;
+    --outline-focus-spacing: 0.25rem;
+
+    /* Fonts */
+    --ff-base: "Lato", system-ui;
+    --fs-nav: 1.75rem;
+    --fs-1: 1rem;
+    --fs-2: 1.25rem;
+    --fs-3: 1.5rem;
+
+    --fs-button: 1.125rem;
+
+    /* Colors */
+    --bg: hsl(0 0% 9%);
+    --bg-overlay: hsl(0 0% 15%);
+    --text: hsl(0 0% 100%);
+    --accent: hsl(269 64% 55%);
+
+    --border-radius: 0.35rem;
+
+    /* Spacings */
+    --btn-spacing: 0.55em 1.125em;
+
+    /* Button */
+    --btn-active-strength: 10;
+    --btn-outline-border-thickness: 3px;
+    --btn-outline-bg-active-strength: 30;
+    --btn-outline-text-active-strength: 30;
+    --btn-outline-alpha: 15%;
+    --btn-outline-alpha-active: 25%;
+}
+
+:root[data-theme="dark"] {
+    --bg: hsl(0 0% 100%);
+    --text: hsl(0 0% 0%);
+    --accent: hsl(282 67% 51%);
+}

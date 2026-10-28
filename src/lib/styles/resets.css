@@ -1,0 +1,84 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: var(--ff-base);
+    font-size: var(--fs-1);
+    
+    background-color: var(--bg);
+    color: var(--text);
+    
+    margin: 0;
+    line-height: 1.6;
+
+    transition: background-color 99ms ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+p,
+li,
+figcaption {
+    text-wrap: pretty;
+    /* max-width: 65ch; */
+}
+
+input, 
+button,
+textarea, 
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input,
+button {
+    border-radius: var(--border-radius);
+}
+
+button {
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    /* text-box: trim-both alphabetic; */
+}
+
+main,
+header,
+footer,
+section,
+article {
+    container-type: inline-size;
+}
+
+:target {
+  scroll-margin-block: 5ex;
+}
+
+:focus-visible {
+    outline: var(--outline-focus-thickness) 
+        solid
+        hsl(from var(--accent) h s calc(l + var(--btn-active-strength)));
+    outline-offset: var(--outline-focus-spacing);
+}
