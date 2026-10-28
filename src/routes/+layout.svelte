@@ -5,7 +5,7 @@
 	import "#lib/styles/resets.css";
 	import "#lib/styles/globals.css";
 	import "#lib/styles/containers.css";
-	import "#lib/styles/common.css"
+	import "#lib/styles/common.scss"
 
 	let { children }: LayoutProps = $props();
 </script>

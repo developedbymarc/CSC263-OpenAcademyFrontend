@@ -1,0 +1,14 @@
+$flex-gaps: (
+    "1": 1rem,
+    "1-25": 1.25rem,
+    "1-5": 1.5rem,
+    "1-75": 1.75rem,
+    "2": 2rem
+);
+
+@each $name, $gap in $flex-gaps {
+  .flex-group--#{$name} {
+    display: flex;
+    gap: $gap;
+  }
+}
