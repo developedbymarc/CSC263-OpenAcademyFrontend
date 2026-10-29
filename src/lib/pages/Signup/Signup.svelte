@@ -21,16 +21,29 @@
         
         <h2 class="text-align-center"><span class="text-stroke clr-accent"><Logo /></span> / register</h2>
         <div class="form-container__inputs">
-            <TextInput 
-                {...$constraints.username}
-                bind:value={$form.username}
-                errors={$errors.username}
+            <div class="flex gap-1">
+                <TextInput 
+                    {...$constraints.firstName}
+                    bind:value={$form.firstName}
+                    errors={$errors.firstName}
 
-                label="Username" 
-                type="text" 
-                placeholder="Enter username"
-                name="username" 
-            />
+                    label="First Name" 
+                    type="text" 
+                    placeholder="Enter first name"
+                    name="first_name" 
+                />
+                <TextInput 
+                    {...$constraints.lastName}
+                    bind:value={$form.lastName}
+                    errors={$errors.lastName}
+
+                    label="Last Name" 
+                    type="text" 
+                    placeholder="Enter last name"
+                    name="last_name" 
+                />
+            </div>
+
             <TextInput 
                 {...$constraints.email}
                 bind:value={$form.email} 
@@ -52,7 +65,7 @@
                 name="password" 
             />
         </div>
-        <div class="flex flex-direction-column flex-gap-1">
+        <div class="flex flex-direction-column gap-1">
             <Button type="submit">Register</Button>
             <p class="text-center">
                 Already have an account? 

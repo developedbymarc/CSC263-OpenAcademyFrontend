@@ -2,7 +2,8 @@ import { type InferType, object, string } from 'yup';
 
 export type SignUpData = InferType<typeof SignUpSchema>;
 export const SignUpSchema = object({
-    username: string().default("").required(),
+    firstName: string().default("").required(),
+    lastName: string().default("").required(),
     email: string().default("").email().required(),
     password: string().default("").min(8).required(),
 });

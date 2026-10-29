@@ -41,7 +41,7 @@
                 name="password" 
             />
         </div>
-        <div class="flex flex-direction-column flex-gap-1">
+        <div class="flex flex-direction-column gap-1">
             <Button type="submit">Login</Button>
             <p class="text-center">
                 Don't have an account? 

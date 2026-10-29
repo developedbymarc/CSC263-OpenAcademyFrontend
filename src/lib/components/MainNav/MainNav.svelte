@@ -6,13 +6,13 @@
 
 </script>
 
-<nav class="main-nav flex flex-gap-2 align-items-center">
+<nav class="main-nav flex gap-2 align-items-center">
     <h1 class="nav__heading">
         <a href="{resolve('/')}"><Logo /></a>
     </h1>
 
-    <div class="flex flex-gap-1-25 align-items-center">
-        <LinkButton class="button-outline button-flat" href={resolve("/auth/signup")}>Explore</LinkButton>
+    <div class="flex gap-1-25 align-items-center">
+        <LinkButton class="button-outline button-flat" href={resolve("/explore")}>Explore</LinkButton>
         <p class="clr-muted">|</p>
         
         <LinkButton href={resolve("/auth/login")} class="button-outline">Log in</LinkButton>

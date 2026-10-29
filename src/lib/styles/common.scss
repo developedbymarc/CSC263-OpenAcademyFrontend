@@ -1,4 +1,4 @@
-$flex-gaps: (
+$gaps: (
   "1": 1rem,
   "1-25": 1.25rem,
   "1-5": 1.5rem,
@@ -6,13 +6,13 @@ $flex-gaps: (
   "2": 2rem
 );
 
-@each $name, $gap in $flex-gaps {
-  .flex-gap-#{$name} {
+@each $name, $gap in $gaps {
+  .gap-#{$name} {
     gap: $gap;
   }
 }
 
-$operator-keys: (
+$flex-keys: (
 	align-items,
 	align-content,
 	justify-content,
@@ -23,10 +23,26 @@ $operator-keys: (
 	place-content
 );
 
-$operator-values: start, end, center, space-evenly, space-between, space-around;
+$flex-values: start, end, center, space-evenly, space-between, space-around;
 
-@each $op in $operator-keys {
-	@each $op-val in $operator-values {
+@each $op in $flex-keys {
+	@each $op-val in $flex-values {
+		.#{$op}-#{$op-val} {
+			#{$op}: #{$op-val};
+		}
+	}
+}
+
+$margin-keys: (
+	margin-block, 
+	margin-inline, 
+	margin-block-start, 
+	margin-block-end
+);
+$margin-values: auto;
+
+@each $op in $margin-keys {
+	@each $op-val in $margin-values {
 		.#{$op}-#{$op-val} {
 			#{$op}: #{$op-val};
 		}

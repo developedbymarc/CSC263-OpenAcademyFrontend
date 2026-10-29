@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { ThemeOptions } from "#lib/types/components/types.ts";
+	import SelectInput from "../SelectInput/SelectInput.svelte";
 
+    let options: ThemeOptions[] = ["light", "dark", "gruvbox"];
     let theme: ThemeOptions = $state("dark");
 
     const updateTheme = () => {
@@ -12,14 +14,11 @@
     $effect(updateTheme)
 </script>
 
-<select name="theme" id="theme-input" bind:value={theme} onchange={updateTheme}>
-    <option value="light">Light</option>
-    <option value="dark">Dark</option>
-    <option value="gruvbox">Gruvbox</option>
-</select>
-
-<style>
-    #theme-input {
-        padding: var(--selectInptPadding);
-    }
-</style>
+<SelectInput 
+    bind:value={theme}
+    {options}
+    
+    name="theme" 
+    id="theme"
+    onchange={updateTheme}
+/>
