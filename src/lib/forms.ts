@@ -1,11 +1,20 @@
-import { type InferType, object, string } from 'yup';
+import { type InferType, object, string, mixed } from 'yup';
+import { EUserRole } from './types/entities/user';
 
 export type SignUpData = InferType<typeof SignUpSchema>;
 export const SignUpSchema = object({
-    firstName: string().default("").min(1).required(),
-    lastName: string().default("").min(1).required(),
-    email: string().default("").email().required(),
-    password: string().default("").min(8).required(),
+    firstName: string().min(1).required(),
+    lastName: string().min(1).required(),
+    email: string().email().required(),
+    password: string().min(8).required(),
+    role: mixed<EUserRole>()
+        .oneOf([
+            EUserRole.Student,
+            EUserRole.Teacher,
+            EUserRole.Moderator,
+            EUserRole.Admin
+        ])
+        .required("Role is required")
 });
 
 export type LoginData = InferType<typeof LoginSchema>;

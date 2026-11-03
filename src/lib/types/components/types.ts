@@ -10,5 +10,5 @@ export type LinkButtonProps = ButtonOnlyProps & HTMLAnchorAttributes;
 type TextInputOnlyProps = { type: "text" | "password" | "email", label: string, errors?: string[], hideLabel?: boolean };
 export type TextInputProps = TextInputOnlyProps & HTMLInputAttributes;
 
-type SelectInputOnlyOptions = { options: string[] };
+type SelectInputOnlyOptions = { options: string[], label: string, errors?: string[] };
 export type SelectInputProps = SelectInputOnlyOptions & HTMLSelectAttributes;

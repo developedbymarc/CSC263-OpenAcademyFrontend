@@ -16,10 +16,9 @@
     <div class="explore__content flex flex-direction-column gap-1">
         <div class="content__options flex align-items-center justify-content-end gap-2">
             <p><b>{data.courses.length}</b> results</p>
-            
+
             <div class="flex align-items-center gap-1">
-                <p>Sort by</p>
-                <SelectInput name="sort-by" options={["relevance"]} />
+                <SelectInput label="Sort by" name="sort-by" options={["relevance"]} />
             </div>
         </div>
         {#if data.courses.length > 0}
@@ -42,7 +41,7 @@
         margin-inline: auto;
 
     }
-    
+
     @container main (min-width: 120ch) {
         .explore-container { grid-template-columns: var(--exploreContainerColumns); }
     }
