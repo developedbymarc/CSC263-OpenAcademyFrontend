@@ -17,34 +17,34 @@
 <section class="center">
     <form class="form-container" method="POST" use:enhance>
         <a href="{resolve('/')}" data-active="true"><span aria-hidden="true">&lt;</span> Go back</a>
-        
+
         <h2 class="text-align-center"><span class="text-stroke clr-accent">ΘΛ</span> / login</h2>
         <div class="form-container__inputs">
-            <TextInput 
+            <TextInput
                 {...$constraints.email}
-                bind:value={$form.email} 
-                errors={$errors.password}
-                
-                label="Email" 
-                type="email" 
-                placeholder="Enter Email" 
+                bind:value={$form.email}
+                errors={$errors.email}
+
+                label="Email"
+                type="email"
+                placeholder="Enter Email"
                 name="email"
             />
-            <TextInput 
+            <TextInput
                 {...$constraints.password}
                 bind:value={$form.password}
                 errors={$errors.password}
 
-                label="Password" 
-                type="password" 
+                label="Password"
+                type="password"
                 placeholder="Enter password"
-                name="password" 
+                name="password"
             />
         </div>
         <div class="flex flex-direction-column gap-1">
             <Button type="submit">Login</Button>
             <p class="text-center">
-                Don't have an account? 
+                Don't have an account?
                 <a href="{resolve('auth/signup')}" data-active="true">Sign up</a>
             </p>
         </div>

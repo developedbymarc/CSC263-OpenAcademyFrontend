@@ -6,9 +6,11 @@
     let { course, mode }: ICourseCard = $props();
 </script>
 
-<Card class="course-card flex gap-1" data-mode={mode}>
-    <div class="card__content flex flex-direction-column">
-        <h3>{course.title}</h3>
-        <p>{course.description}</p>
-    </div>
-</Card>
+<a href="#" class="empty">
+    <Card class="course-card flex gap-1" data-mode={mode}>
+        <div class="card__content flex flex-direction-column">
+            <h3>{course.title}</h3>
+            <p>{course.description}</p>
+        </div>
+    </Card>
+</a>

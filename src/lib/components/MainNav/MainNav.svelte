@@ -15,7 +15,7 @@
         <LinkButton class="button-outline button-flat" href={resolve("/explore")}>Explore</LinkButton>
         <p class="clr-muted">|</p>
         
-        <LinkButton href={resolve("/auth/login")} class="button-outline">Log in</LinkButton>
+        <LinkButton href={resolve("/auth/login")} class="button-outline button-flat">Log in</LinkButton>
         <LinkButton href={resolve("/auth/signup")}>Sign up</LinkButton>
         
         <p class="clr-muted">|</p>
