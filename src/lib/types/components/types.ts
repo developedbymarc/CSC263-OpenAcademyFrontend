@@ -7,8 +7,13 @@ export type ButtonProps = ButtonOnlyProps & HTMLButtonAttributes;
 
 export type LinkButtonProps = ButtonOnlyProps & HTMLAnchorAttributes;
 
-type TextInputOnlyProps = { type: "text" | "password" | "email", label: string, errors?: string[], hideLabel?: boolean };
+type InputOnlyProps = { label: string, errors?: string[], hideLabel?: boolean }
+
+type TextInputOnlyProps = { type: "text" | "password" | "email" } & InputOnlyProps;
 export type TextInputProps = TextInputOnlyProps & HTMLInputAttributes;
 
-type SelectInputOnlyOptions = { options: string[], label: string, errors?: string[], containerClass?: string, hideLabel: boolean };
+type SelectInputOnlyOptions = { options: string[], containerClass?: string } & InputOnlyProps;
 export type SelectInputProps = SelectInputOnlyOptions & HTMLSelectAttributes;
+
+type FileInputOnlyProps = { accept: string } & InputOnlyProps;
+export type FileInputProps = FileInputOnlyProps & HTMLInputAttributes;

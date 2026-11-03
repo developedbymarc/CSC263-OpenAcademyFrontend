@@ -2,7 +2,8 @@
 
 input,
 button,
-textarea {
+textarea,
+select{
     border-radius: var(--globBorderRadius);
 }
 
@@ -45,7 +46,6 @@ $fontSizes: (
     font-size: $fs;
   }
 }
-
 
 :root {
     color-scheme: light;

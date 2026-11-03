@@ -15,7 +15,6 @@
         &[data-hide="true"] { display: none; }
     }
 
-
     input,
     select {
         --mState: var(--bgOverlay);
@@ -30,6 +29,8 @@
         color: var(--mTextState);
 
         border: var(--globBorderThickness) solid var(--mBorderColor);
+
+        &:is([type="file"]) { border-style: dashed; }
 
         &:focus-visible { border-color: var(--accent); }
         &:user-invalid { --mState: hsl(from var(--clrError) h s l / var(--inptBgAlpha)); }
