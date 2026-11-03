@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ThemeOptions } from "#lib/types/components/types.ts";
-	import SelectInput from "../SelectInput/SelectInput.svelte";
+	import SelectInput from "../Inputs/SelectInput.svelte";
 
     let options: ThemeOptions[] = ["light", "dark", "gruvbox"];
     let theme: ThemeOptions = $state("dark");
@@ -14,11 +14,13 @@
     $effect(updateTheme)
 </script>
 
-<SelectInput 
+<SelectInput
     bind:value={theme}
     {options}
-    
-    name="theme" 
+
+    label="Theme"
+    hideLabel={true}
+    name="theme"
     id="theme"
     onchange={updateTheme}
 />

@@ -1,0 +1,42 @@
+.inpt-container {
+    --mTextState: var(--text);
+
+    gap: var(--inptGap);
+
+    /* &:has(:user-valid) { --mTextState: var(--clrSuccess) } */
+    &:not(:has(select)) { width: 100%; }
+    &:has(:user-invalid) { --mTextState: var(--clrError) }
+
+    label {
+        font-size: var(--fsInptLabel);
+        color: var(--mTextState);
+        font-weight: bold;
+
+        &[data-hide="true"] { display: none; }
+    }
+
+
+    input,
+    select {
+        --mState: var(--bgOverlay);
+        --mBorderColor:
+            hsl(from var(--mState)
+            h s calc(l + var(--globThemeBorderBrightness))
+            / var(--globThemeBorderAlpha));
+
+        font-size: var(--fsInptText);
+        background-color: var(--mState);
+        padding: var(--inptPadding);
+        color: var(--mTextState);
+
+        border: var(--globBorderThickness) solid var(--mBorderColor);
+
+        &:focus-visible { border-color: var(--accent); }
+        &:user-invalid { --mState: hsl(from var(--clrError) h s l / var(--inptBgAlpha)); }
+    }
+
+    .inpt-container__errors {
+        color: var(--clrError);
+        margin-inline-start: var(--inptErrListMargin);
+    }
+}

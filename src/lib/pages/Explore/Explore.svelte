@@ -1,10 +1,12 @@
 <script lang="ts">
 	import CourseCard from "#lib/components/Card/CourseCard.svelte";
-	import SelectInput from "#lib/components/SelectInput/SelectInput.svelte";
+	import SelectInput from "#lib/components/Inputs/SelectInput.svelte";
 	import type { ICourse } from "#lib/types/entities/course.ts";
 	import ExploreHead from "./ExploreHead.svelte";
 
     type IDataProps = { data: { courses: ICourse[] } };
+
+    let sortBy = $state("Relevance");
     let { data }: IDataProps = $props();
 </script>
 
@@ -18,7 +20,13 @@
             <p><b>{data.courses.length}</b> results</p>
 
             <div class="flex align-items-center gap-1">
-                <SelectInput label="Sort by" name="sort-by" options={["relevance"]} />
+                <SelectInput
+                    bind:value={sortBy}
+                    label="Sort by"
+                    name="sort-by"
+                    options={["relevance"]}
+                    containerClass="align-items-center gap-1"
+                />
             </div>
         </div>
         {#if data.courses.length > 0}

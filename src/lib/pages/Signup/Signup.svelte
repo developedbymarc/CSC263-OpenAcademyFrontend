@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from "#lib/components/Button/Button.svelte";
-	import TextInput from "#lib/components/TextInput/TextInput.svelte";
+	import TextInput from "#lib/components/Inputs/TextInput.svelte";
 	import { resolve } from "$app/paths";
     import { superForm } from 'sveltekit-superforms';
     import { untrack } from 'svelte';
