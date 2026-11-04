@@ -5,11 +5,13 @@
     import { superForm } from 'sveltekit-superforms';
     import { untrack } from 'svelte';
 	import { yupClient } from "sveltekit-superforms/adapters";
-	import { SignUpSchema, type SignUpData } from "#lib/forms.ts";
+	import { SignUpSchema, type ISignUpData } from "#lib/forms.ts";
 	import Logo from "#lib/components/Logo/Logo.svelte";
+	import SelectInput from "#lib/components/Inputs/SelectInput.svelte";
+	import { EUserRole } from "#lib/types/entities/user.ts";
 
     let { data } = $props();
-    const { form, constraints, errors, enhance } = superForm<SignUpData>(untrack(() => data.form), {
+    const { form, constraints, errors, enhance } = superForm<ISignUpData>(untrack(() => data.form), {
       validators: yupClient(SignUpSchema),
       validationMethod: 'oninput'
     });
@@ -63,6 +65,18 @@
                 type="password"
                 placeholder="Enter password"
                 name="password"
+            />
+
+            <SelectInput
+                {...$constraints.role}
+                bind:value={$form.role}
+                errors={$errors.role}
+
+                containerClass="flex-direction-column"
+                label="Role"
+                id="role"
+                name="role"
+                options={Object.values(EUserRole)}
             />
         </div>
         <div class="flex flex-direction-column gap-1">

@@ -1,11 +1,11 @@
-import { type LoginData, LoginSchema } from '#lib/forms.js';
+import { type ILoginData, LoginSchema } from '#lib/forms.js';
 import { superValidate } from 'sveltekit-superforms';
 import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { yup } from 'sveltekit-superforms/adapters';
 
 export const load = async () => {
-  const form = await superValidate<LoginData>(yup(LoginSchema));
+  const form = await superValidate<ILoginData>(yup(LoginSchema));
   return { form };
 };
 

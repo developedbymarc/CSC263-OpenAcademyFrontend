@@ -5,10 +5,10 @@
     import { superForm } from 'sveltekit-superforms';
     import { untrack } from 'svelte';
 	import { yupClient } from "sveltekit-superforms/adapters";
-	import { LoginSchema, type LoginData } from "#lib/forms.ts";
+	import { LoginSchema, type ILoginData } from "#lib/forms.ts";
 
     let { data } = $props();
-    const { form, constraints, errors, enhance } = superForm<LoginData>(untrack(() => data.form), {
+    const { form, constraints, errors, enhance } = superForm<ILoginData>(untrack(() => data.form), {
       validators: yupClient(LoginSchema),
       validationMethod: 'oninput'
     });

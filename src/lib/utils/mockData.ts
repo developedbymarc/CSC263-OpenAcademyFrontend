@@ -4,7 +4,7 @@ import { ECourseStatus, type ICourse } from "#lib/types/entities/course.ts";
 const genMockTimeStamp = (): ITimeStamped => ({ createdAt: new Date(), updatedAt: new Date() });
 
 export interface IMockData {
-    courses: ICourse[]
+    courses: ICourse[],
 }
 
 export const mockData: IMockData = {

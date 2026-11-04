@@ -1,11 +1,11 @@
-import { type SignUpData, SignUpSchema } from '#lib/forms.js';
+import { type ISignUpData, SignUpSchema } from '#lib/forms.js';
 import { superValidate } from 'sveltekit-superforms';
 import { message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { yup } from 'sveltekit-superforms/adapters';
 
 export const load = async () => {
-  const form = await superValidate<SignUpData>(yup(SignUpSchema));
+  const form = await superValidate<ISignUpData>(yup(SignUpSchema));
   return { form };
 };
 

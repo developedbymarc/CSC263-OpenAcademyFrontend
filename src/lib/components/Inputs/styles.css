@@ -16,7 +16,8 @@
     }
 
     input,
-    select {
+    select,
+    textarea {
         --mState: var(--bgOverlay);
         --mBorderColor:
             hsl(from var(--mState)
