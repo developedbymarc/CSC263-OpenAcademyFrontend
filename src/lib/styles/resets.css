@@ -11,17 +11,17 @@ html {
     -moz-text-size-adjust: none;
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
-    
+
     scrollbar-gutter: stable;
 }
 
 body {
     font-family: var(--ffBase);
     font-size: var(--fs1);
-    
+
     background-color: var(--bg);
     color: var(--text);
-    
+
     margin: 0;
     line-height: 1.6;
 
@@ -44,12 +44,13 @@ figcaption {
     /* max-width: 65ch; */
 }
 
-input, 
+input,
 button,
-textarea, 
+textarea,
 select {
   font-family: inherit;
   font-size: inherit;
+  max-width: 100%;
 }
 
 input:where([type='radio'], [type='checkbox']) {
@@ -87,7 +88,7 @@ video {
 }
 
 :focus-visible {
-    outline: var(--outlineFocusThickness) 
+    outline: var(--outlineFocusThickness)
         solid
         hsl(from var(--accent) h s calc(l + var(--btnActiveStrength)));
     outline-offset: var(--outlineFocusOffset);

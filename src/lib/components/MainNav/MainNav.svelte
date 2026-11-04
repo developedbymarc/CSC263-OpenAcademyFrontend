@@ -13,11 +13,12 @@
 
     <div class="flex gap-1-25 align-items-center">
         <LinkButton class="button-outline button-flat" href={resolve("/explore")}>Explore</LinkButton>
+        <LinkButton class="button-outline button-flat" href={resolve("/(private)/create")}>Create</LinkButton>
         <p class="clr-muted">|</p>
-        
+
         <LinkButton href={resolve("/auth/login")} class="button-outline button-flat">Log in</LinkButton>
         <LinkButton href={resolve("/auth/signup")}>Sign up</LinkButton>
-        
+
         <p class="clr-muted">|</p>
         <Themer />
     </div>
@@ -28,7 +29,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
+
         /* background-color: var(--bgOverlay); */
         border-block-end: var(--mainNavBorderThickness) solid var(--bgOverlay);
         padding: var(--mainNavSpacing);

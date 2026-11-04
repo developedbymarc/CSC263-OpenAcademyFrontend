@@ -34,9 +34,9 @@ $flex-values: start, end, center, space-evenly, space-between, space-around;
 }
 
 $margin-keys: (
-	margin-block, 
-	margin-inline, 
-	margin-block-start, 
+	margin-block,
+	margin-inline,
+	margin-block-start,
 	margin-block-end
 );
 $margin-values: auto;
@@ -45,6 +45,15 @@ $margin-values: auto;
 	@each $op-val in $margin-values {
 		.#{$op}-#{$op-val} {
 			#{$op}: #{$op-val};
+		}
+	}
+}
+
+// For gaps
+@each $op in $margin-keys {
+	@each $op-name, $op-val in $gaps {
+		.#{$op}-#{$op-name} {
+			#{$op}: $op-val;
 		}
 	}
 }

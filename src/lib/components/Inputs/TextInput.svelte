@@ -5,7 +5,7 @@
     let {
         value = $bindable(""),
         label,
-        type,
+        type = "text",
         name,
         errors,
         placeholder,
