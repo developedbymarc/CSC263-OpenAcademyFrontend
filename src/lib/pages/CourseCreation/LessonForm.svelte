@@ -12,6 +12,11 @@
     const carta = new Carta();
 	let { form, errors, constraints, moduleIdx, idx }: Pick<SuperForm<ICourseData>, "form" | "errors" | "constraints">
 	    & { moduleIdx : number, idx: number } = $props();
+
+	const removeLesson = () => form.update((course) => {
+	    course.modules[moduleIdx].lessons = course.modules[moduleIdx].lessons.filter((x, _idx) => _idx != idx)
+	    return course;
+	});
 </script>
 
 <div class="flex flex-direction-column gap-1">
@@ -22,7 +27,14 @@
             <Button onclick={() => collapse = !collapse} class="button-outline button-flat" type="button">
                 { collapse ? "Open" : "Collapse" }
             </Button>
-            <Button class="button-outline button-flat" accent="error">Remove</Button>
+            <Button
+                onclick={removeLesson}
+                class="button-outline button-flat"
+                type="button"
+                accent="error"
+            >
+                    Remove
+            </Button>
         </div>
     </div>
 

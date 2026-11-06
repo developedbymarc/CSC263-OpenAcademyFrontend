@@ -105,6 +105,9 @@ $fontSizes: (
         --exploreContainerSize: 75vw;
         --exploreContainerColumns: 25% auto;
 
+        // Responsivness
+        --mobileThreshold: 120ch;
+
     /* Fonts */
     --ffBase: "Lato", system-ui;
     --ffNav: 1.75rem;

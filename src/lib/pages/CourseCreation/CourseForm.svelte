@@ -68,8 +68,11 @@
         <Button onclick={addModule} type="button" class="button-outline button-flat">Add Module</Button>
     </div>
 
-    <div class="flex gap-1 margin-block-start-2">
+    <div class="flex gap-1 margin-block-start-2 justify-content-space-between">
         <Button type="submit">Submit Course</Button>
-        <Button onclick={() => reset()} type="button" accent="error">Reset</Button>
+        <div class="flex align-items-center gap-1">
+            <Button type="submit">Save as Draft</Button>
+            <Button onclick={() => reset()} type="button" accent="error">Reset</Button>
+        </div>
     </div>
 </form>

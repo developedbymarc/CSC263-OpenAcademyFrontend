@@ -50,7 +50,7 @@
 
     }
 
-    @container main (min-width: 120ch) {
+    @container main (min-width: var(--mobileThreshold)) {
         .explore-container { grid-template-columns: var(--exploreContainerColumns); }
     }
 </style>

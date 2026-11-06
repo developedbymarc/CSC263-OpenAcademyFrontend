@@ -23,14 +23,39 @@
             return course;
         }, { taint: false })
     }
+
+	const removeModule = () => form.update((course) => {
+	    course.modules = course.modules.filter((x, _idx) => _idx != idx)
+	    return course;
+	});
 </script>
 
 <div class="flex flex-direction-column gap-1">
     <div class="flex align-items-center justify-content-space-between">
         <h2>Module {idx + 1}</h2>
 
-        <div class="flex gap-1">
-            <Button class="button-outline button-flat" accent="error">Remove</Button>
+        <div class="flex gap-2">
+            <div class="flex gap-1">
+                <Button
+                    onclick={removeModule}
+                    class="button-outline button-flat"
+                    accent="error"
+                    type="button"
+                >
+                        Remove
+                </Button>
+            </div>
+
+            {#if $form.modules.length > 1}
+                <div class="flex gap-0-5">
+                    <Button class="button-outline button-flat">
+                        <i class="fa-solid fa-caret-up"></i>
+                    </Button>
+                    <Button class="button-outline button-flat">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </Button>
+                </div>
+            {/if}
         </div>
     </div>
 
