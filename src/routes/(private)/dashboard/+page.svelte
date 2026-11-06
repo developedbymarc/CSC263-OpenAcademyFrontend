@@ -1,6 +1,6 @@
 <script>
-	import Dashboard from "#lib/components/Dashboard/Dashboard.svelte";
+	import Admin from "#lib/pages/Dashboard/Admin.svelte";
 
 </script>
 
-<Dashboard />
+<Admin />
