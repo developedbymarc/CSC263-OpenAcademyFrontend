@@ -1,25 +1,15 @@
 <script lang="ts">
 	import type { HTMLAttributes } from "svelte/elements";
+	import "./styles.scss";
 
-    let { children, class: className, ...rest }: HTMLAttributes<HTMLDivElement> = $props();
+    let {
+        children,
+        class: className,
+        accent,
+        ...rest
+    }: { accent?: string } & HTMLAttributes<HTMLDivElement> = $props();
 </script>
 
-<div class="card {className ?? ''}" {...rest}>
+<div class="card {className ?? ''}" {...rest} data-accent="{accent ?? ''}">
     {@render children?.()}
 </div>
-
-<style>
-    .card {
-        --m-spacing: var(--cardSpacing);
-
-        padding: var(--m-spacing);
-        border:
-            var(--globBorderThickness)
-            solid
-            hsl(from var(--accent) h s calc(l + var(--globThemeBorderBrightness)) / var(--globThemeBorderAlpha));
-        border-radius: var(--globBorderRadius);
-
-        &.card-medium { --m-spacing: var(--cardSpacingMedium); }
-        &.card-large { --m-spacing: var(--cardSpacingLarge); }
-    }
-</style>

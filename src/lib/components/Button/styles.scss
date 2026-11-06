@@ -1,3 +1,5 @@
+@use '../../styles/mixins.scss';
+
 a.button {
     border-radius: var(--globBorderRadius);
     text-decoration: none;
@@ -13,6 +15,8 @@ a.button {
     font-size: var(--fsButton);
     border: var(--globBorderThickness) solid var(--accent);
 
+    & > i { margin-inline-end: var(--btnIconMargin); }
+
     &[data-accent="error"] {
         --accent: var(--clrError);
     }
@@ -20,7 +24,7 @@ a.button {
     &:hover,
     &:focus-visible {
         --mActiveClr: hsl(from var(--accent) h s calc(l + var(--btnActiveStrength)));
-        
+
         background-color: var(--mActiveClr);
         border-color: var(--mActiveClr);
 
@@ -28,22 +32,9 @@ a.button {
 }
 
 .button:is(.button-outline) {
-    --mActiveTextClr: hsl(from var(--accent) h s calc(l + var(--btnOutlineTextActiveStrength)));
-    
-    background-color: hsl(from var(--accent) h s l / var(--btnOutlineAlpha));
-    border-color: var(--accent);
-    color: var(--mActiveTextClr);
+    @include mixins.Translucent();
 
-    &:is(.button-flat) { 
-        border: none; 
-    }
-
-    &:hover,
-    &:focus-visible {
-        color: var(--mActiveTextClr);
-        background-color: hsl(
-            from var(--accent) 
-            h s calc(l + var(--btnOutlineBgActiveStrength)) / var(--btnOutlineAlphaActive)
-        );
+    &:is(.button-flat) {
+        border: none;
     }
 }

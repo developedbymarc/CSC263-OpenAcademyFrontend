@@ -1,0 +1,27 @@
+@mixin Translucent(
+    $accent: var(--accent),
+    $alpha: var(--btnOutlineAlpha),
+    $activeAlpha: var(--btnOutlineAlphaActive),
+    $activeBgStrength: var(--btnOutlineBgActiveStrength),
+    $activeTextStrength: var(--btnOutlineTextActiveStrength)
+) {
+    --mActiveTextClr: hsl(from #{$accent} h s calc(l + #{$activeTextStrength}));
+
+    background-color: hsl(from $accent h s l / var(--btnOutlineAlpha));
+    // border-color: $accent;
+    color: var(--mActiveTextClr);
+
+    &:is(.button-flat) {
+        border: none;
+    }
+
+
+    &:is(a, button):hover,
+    &:is(a, button):focus-visible {
+        color: var(--mActiveTextClr);
+        background-color: hsl(
+            from $accent
+            h s calc(l + $activeBgStrength) / $activeAlpha
+        );
+    }
+}

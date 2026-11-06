@@ -18,11 +18,11 @@
 </script>
 
 <section class="center">
-    <form class="form-container" method="POST" use:enhance>
+    <form class="form-container flex flex-direction-column gap-2" method="POST" use:enhance>
         <a href="{resolve('/')}" data-active="true"><span aria-hidden="true">&lt;</span> Go back</a>
 
         <h2 class="text-align-center"><span class="text-stroke clr-accent"><Logo /></span> / register</h2>
-        <div class="form-container__inputs">
+        <div class="form-container__inputs flex flex-direction-column gap-1-25">
             <div class="flex gap-1">
                 <TextInput
                     {...$constraints.firstName}

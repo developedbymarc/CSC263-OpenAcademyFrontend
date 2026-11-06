@@ -1,6 +1,5 @@
 <script>
-	import LinkButton from "#lib/components/Button/LinkButton.svelte";
-	import { resolve } from "$app/paths";
+	import AdminAside from "#lib/pages/Dashboard/AdminAside.svelte";
 
 	let { children } = $props();
 </script>
@@ -8,10 +7,7 @@
     <aside class="flex flex-direction-column gap-1">
         <h2>Dashboard</h2>
 
-        <div class="flex flex-direction-column gap-1">
-            <LinkButton class="button-outline button-flat" href={resolve("/(private)/dashboard")}>Dashboard</LinkButton>
-            <LinkButton class="button-outline button-flat" href={resolve("/(private)/dashboard/settings")}>Settings</LinkButton>
-        </div>
+        <AdminAside />
     </aside>
     <div class="dashboard__content">
         {@render children()}
@@ -20,6 +16,6 @@
 
 <style>
     @container main (min-width: var(--mobileThreshold)) {
-        .dashboard-container { display: grid; grid-template-columns: 10% auto }
+        .dashboard-container { display: grid; grid-template-columns: var(--dashboardGridColumns) }
     }
 </style>

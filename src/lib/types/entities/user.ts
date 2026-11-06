@@ -9,8 +9,6 @@ import type { IRefreshToken } from "./token";
 export enum EUserRole {
     Student = "student",
     Teacher = "teacher",
-    Admin = "admin",
-    Moderator = "moderator"
 };
 export enum EAccountStatus { Active, Inactive, Disabled };
 export interface IUser extends IEntity, ITimeStamped {

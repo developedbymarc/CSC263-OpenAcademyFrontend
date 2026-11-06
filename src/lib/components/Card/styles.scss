@@ -1,0 +1,19 @@
+@use "../../styles//mixins.scss";
+
+.card {
+    --m-spacing: var(--cardSpacing);
+
+    padding: var(--m-spacing);
+    border:
+        var(--globBorderThickness)
+        solid
+        hsl(from var(--accent) h s calc(l + var(--globThemeBorderBrightness)) / var(--globThemeBorderAlpha));
+    border-radius: var(--globBorderRadius);
+
+    &.card-medium { --m-spacing: var(--cardSpacingMedium); }
+    &.card-large { --m-spacing: var(--cardSpacingLarge); }
+
+    &:is([data-accent="accent"]) {
+        @include mixins.Translucent();
+    }
+}
