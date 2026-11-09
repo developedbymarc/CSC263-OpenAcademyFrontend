@@ -1,4 +1,4 @@
-import { type InferType, object, string, mixed, ObjectSchema, number, array } from 'yup';
+import { type InferType, object, string, mixed, ObjectSchema, number, array, bool } from 'yup';
 import { EUserRole } from './types/entities/user';
 import type { ICourse, ILesson, IModule } from './types/entities/course';
 
@@ -10,7 +10,8 @@ export const SignUpSchema = object({
     lastName: string().min(1).required(),
     email: string().email().required(),
     password: string().min(8).required(),
-    role: mixed<EUserRole>().oneOf(Object.values(EUserRole)).required("Role is required")
+    role: mixed<EUserRole>().oneOf(Object.values(EUserRole)).required("Role is required"),
+    remember: bool().default(false)
 });
 
 export type ILoginData = InferType<typeof LoginSchema>;

@@ -27,3 +27,6 @@ export type FileInputProps = FileInputOnlyProps & HTMLInputAttributes;
 
 type TextAreaInputOnlyProps = InputOnlyProps;
 export type TextAreaInputProps = TextAreaInputOnlyProps & HTMLTextareaAttributes;
+
+type CheckboxInputOnlyProps = { containerClass?: string } & InputOnlyProps;
+export type CheckboxInputProps = CheckboxInputOnlyProps & HTMLInputAttributes

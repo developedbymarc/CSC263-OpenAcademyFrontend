@@ -9,6 +9,7 @@
 	import Logo from "#lib/components/Logo/Logo.svelte";
 	import SelectInput from "#lib/components/Inputs/SelectInput.svelte";
 	import { EUserRole } from "#lib/types/entities/user.ts";
+	import CheckboxInput from "#lib/components/Inputs/CheckboxInput.svelte";
 
     let { data } = $props();
     const { form, constraints, errors, enhance } = superForm<ISignUpData>(untrack(() => data.form), {
@@ -77,6 +78,16 @@
                 id="role"
                 name="role"
                 options={Object.values(EUserRole)}
+            />
+
+            <CheckboxInput
+                {...$constraints.remember}
+                bind:checked={$form.remember}
+                errors={$errors.remember}
+
+                label="Remember Me?"
+                id="remember"
+                name="remember"
             />
         </div>
         <div class="flex flex-direction-column gap-1">
