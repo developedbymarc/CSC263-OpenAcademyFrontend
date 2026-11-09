@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { ICourse } from "#lib/types/entities/course.ts";
+	import { resolve } from "$app/paths";
 	import Card from "./Card.svelte";
 
     type ICourseCard = { course: ICourse, mode: string }
     let { course, mode }: ICourseCard = $props();
 </script>
 
-<a href="#" class="empty">
+<a href={resolve(`/explore/${course.id}`)} class="empty">
     <Card class="course-card flex gap-1" data-mode={mode}>
         <div class="card__content flex flex-direction-column">
             <h3>{course.title}</h3>

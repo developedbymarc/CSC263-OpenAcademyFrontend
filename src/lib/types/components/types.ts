@@ -6,9 +6,10 @@ import type {
     HTMLTextareaAttributes
 } from "svelte/elements";
 
+export type Accents = "default" | "error";
 export type ThemeOptions = "light" | "dark" | "gruvbox";
 
-type ButtonOnlyProps = { accent?: string };
+type ButtonOnlyProps = { accent?: Accents };
 export type ButtonProps = ButtonOnlyProps & HTMLButtonAttributes;
 
 export type LinkButtonProps = ButtonOnlyProps & HTMLAnchorAttributes;

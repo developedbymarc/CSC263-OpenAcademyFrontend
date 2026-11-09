@@ -7,7 +7,7 @@
 	import { Carta, MarkdownEditor } from 'carta-md';
     import 'carta-md/default.css';
 
-   	let collapse = $state(true);
+   	let expand = $state(false);
 
     const carta = new Carta();
 	let { form, errors, constraints, moduleIdx, idx }: Pick<SuperForm<ICourseData>, "form" | "errors" | "constraints">
@@ -24,8 +24,8 @@
         <h2>Module {moduleIdx + 1} / Lesson {idx + 1}</h2>
 
         <div class="flex gap-1">
-            <Button onclick={() => collapse = !collapse} class="button-outline button-flat" type="button">
-                { collapse ? "Open" : "Collapse" }
+            <Button onclick={() => expand = !expand} class="button-outline button-flat" type="button" data-accent={expand ? "error" : ""}>
+                { expand ? "Collapse" : "Expand" }
             </Button>
             <Button
                 onclick={removeLesson}
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    {#if !collapse}
+    {#if expand}
         <TextInput
             {...$constraints?.modules?.title}
             bind:value={$form.modules[moduleIdx].lessons[idx].title}

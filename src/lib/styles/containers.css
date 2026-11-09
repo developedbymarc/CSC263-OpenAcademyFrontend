@@ -18,3 +18,8 @@ body {
     place-items: center;
     min-height: 100%;
 }
+
+.course-explore-container {
+    max-inline-size: var(--courseExploreContainerMaxWidth);
+    margin-inline: auto;
+}

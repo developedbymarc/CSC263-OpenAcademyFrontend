@@ -2,7 +2,7 @@
 	import type { LinkButtonProps } from "#lib/types/components/types.ts";
     import "./styles.scss";
 
-    let { children, href, class: className, accent, ...rest }: LinkButtonProps = $props();
+    let { children, href, class: className, accent = "default", ...rest }: LinkButtonProps = $props();
 </script>
 
 <a
