@@ -15,7 +15,7 @@
         &[data-hide="true"] { display: none; }
     }
 
-    input[type="checkbox"] { width: 1.25rem; aspect-ratio: 1; }
+    input[type="checkbox"] { width: var(--inptCheckboxSize); aspect-ratio: 1; }
 
     input,
     select,

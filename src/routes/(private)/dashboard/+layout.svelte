@@ -1,5 +1,6 @@
 <script>
 	import AdminAside from "#lib/pages/Dashboard/AdminAside.svelte";
+	import CommonAside from "#lib/pages/Dashboard/CommonAside.svelte";
 
 	let { children } = $props();
 </script>
@@ -8,6 +9,9 @@
         <h2>Dashboard</h2>
 
         <AdminAside />
+
+        <!-- All users no matter the role have this -->
+        <CommonAside />
     </aside>
     <div class="dashboard__content">
         {@render children()}

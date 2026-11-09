@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { TextAreaInputProps } from "#lib/types/components/types.ts";
+	import { capitalize } from "#lib/utils/utils.ts";
 	import "./styles.css";
 
     let {
@@ -18,7 +19,7 @@
     {#if errors}
         <ul class="inpt-container__errors">
             {#each (errors ?? []) as error, idx (idx)}
-                <li>{error}</li>
+                <li>{capitalize(error)}</li>
             {/each}
         </ul>
     {/if}

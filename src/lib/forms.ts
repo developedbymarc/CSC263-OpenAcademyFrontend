@@ -1,6 +1,9 @@
-import { type InferType, object, string, mixed, ObjectSchema, number, array, bool } from 'yup';
+import { type InferType, object, string, mixed, ObjectSchema, number, array, bool, ref } from 'yup';
 import { EUserRole } from './types/entities/user';
 import type { ICourse, ILesson, IModule } from './types/entities/course';
+
+// Common
+const passwInput = string().min(8);
 
 // Auth Schemas
 
@@ -9,7 +12,7 @@ export const SignUpSchema = object({
     firstName: string().min(1).required(),
     lastName: string().min(1).required(),
     email: string().email().required(),
-    password: string().min(8).required(),
+    password: passwInput.required(),
     role: mixed<EUserRole>().oneOf(Object.values(EUserRole)).required("Role is required"),
     remember: bool().default(false)
 });
@@ -17,7 +20,13 @@ export const SignUpSchema = object({
 export type ILoginData = InferType<typeof LoginSchema>;
 export const LoginSchema = object({
     email: string().email().required(),
-    password: string().min(8).required(),
+    password: passwInput.required(),
+});
+
+export type IResetPasswordData = InferType<typeof ResetPasswordSchema>;
+export const ResetPasswordSchema = object({
+    password: passwInput.required(),
+    repeatPassword: string().default("").oneOf([ref("password")], "Passwords must match").required(),
 });
 
 // Course Schemas

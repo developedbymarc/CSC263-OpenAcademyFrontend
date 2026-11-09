@@ -5,12 +5,13 @@
     import { superForm } from 'sveltekit-superforms';
     import { untrack } from 'svelte';
 	import { yupClient } from "sveltekit-superforms/adapters";
-	import { LoginSchema, type ILoginData } from "#lib/forms.ts";
+	import { ResetPasswordSchema, type IResetPasswordData } from "#lib/forms.ts";
 
     let { data } = $props();
-    const { form, constraints, errors, enhance } = superForm<ILoginData>(untrack(() => data.form), {
-      validators: yupClient(LoginSchema),
-      validationMethod: 'oninput'
+    const { form, constraints, errors, enhance } = superForm<IResetPasswordData>(untrack(() => data.form), {
+      validators: yupClient(ResetPasswordSchema),
+      validationMethod: 'oninput',
+      dataType: "json"
     });
 </script>
 
@@ -18,41 +19,37 @@
     <form class="form-container flex flex-direction-column gap-2" method="POST" use:enhance>
         <a href="{resolve('/')}" data-active="true"><span aria-hidden="true">&lt;</span> Go back</a>
 
-        <h2 class="text-align-center"><span class="text-stroke clr-accent">ΘΛ</span> / login</h2>
+        <h2 class="text-align-center"><span class="text-stroke clr-accent">ΘΛ</span> / reset password</h2>
         <div class="form-container__inputs flex flex-direction-column gap-1-25">
-            <TextInput
-                {...$constraints.email}
-                bind:value={$form.email}
-                errors={$errors.email}
-
-                label="Email"
-                type="email"
-                placeholder="Enter Email"
-                name="email"
-            />
             <TextInput
                 {...$constraints.password}
                 bind:value={$form.password}
                 errors={$errors.password}
 
-                label="Password"
+                label="New password"
                 type="password"
                 placeholder="Enter password"
                 name="password"
             />
+            <TextInput
+                {...$constraints.repeatPassword}
+                bind:value={$form.repeatPassword}
+                errors={$errors.repeatPassword}
+
+                label="Confirm Password"
+                type="text"
+                placeholder="Enter same password"
+                name="repeatPassword"
+            />
         </div>
         <div class="flex flex-direction-column gap-1">
-            <Button type="submit">Login</Button>
-            <p class="text-center">
-                Don't have an account?
-                <a href="{resolve('auth/signup')}" data-active="true">Sign up</a>
-            </p>
+            <Button type="submit">Reset Password</Button>
         </div>
     </form>
 </section>
 
 <style>
     .form-container {
-        min-width: 30vw;
+        min-width: var(--authFormMinWidth);
     }
 </style>

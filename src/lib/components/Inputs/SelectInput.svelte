@@ -34,7 +34,7 @@
     {#if errors}
         <ul class="inpt-container__errors clr-error">
             {#each (errors ?? []) as error, idx (idx)}
-                <li>{error}</li>
+                <li>{capitalize(error)}</li>
             {/each}
         </ul>
     {/if}
