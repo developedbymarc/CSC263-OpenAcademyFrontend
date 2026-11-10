@@ -61,6 +61,7 @@ $fontSizes: (
     --globTextStrokeThickness: 0.5rem;
     --globThemeBorderBrightness: -15;
     --globThemeBorderAlpha: 0.35;
+    --globLineHeight: 1.6rem;
 
     --mainContainerMaxWidth: 2000px;
     --mainContainerPadding: clamp(1rem, 4vw, 2rem);
@@ -80,7 +81,7 @@ $fontSizes: (
 
         /* Button */
         --btnMargin: 0.35em 1em;
-        --btnIconMargin: 0.35rem;
+        --btnIconGap: 0.75rem;
         --btnActiveStrength: 10;
         --btnOutlineBgActiveStrength: 15;
         --btnOutlineTextActiveStrength: 5;

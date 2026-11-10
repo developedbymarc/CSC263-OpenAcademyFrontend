@@ -10,6 +10,15 @@
         hsl(from var(--accent) h s calc(l + var(--globThemeBorderBrightness)) / var(--globThemeBorderAlpha));
     border-radius: var(--globBorderRadius);
 
+    .content__description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        min-height: calc(var(--globLineHeight) + var(--globLineHeight));
+        overflow: hidden;
+        text-overflow: ellipsis;    }
+
     &.card-medium { --m-spacing: var(--cardSpacingMedium); }
     &.card-large { --m-spacing: var(--cardSpacingLarge); }
 

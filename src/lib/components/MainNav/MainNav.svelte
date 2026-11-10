@@ -12,9 +12,18 @@
     </h1>
 
     <div class="flex gap-1-25 align-items-center">
-        <LinkButton class="button-outline button-flat" href={resolve("/explore")}>Explore</LinkButton>
-        <LinkButton class="button-outline button-flat" href={resolve("/(private)/create")}>Create</LinkButton>
-        <LinkButton class="button-outline button-flat" href={resolve("/(private)/dashboard")}>Dashboard</LinkButton>
+        <LinkButton class="button-outline button-flat" href={resolve("/explore")}>
+            <i class="fa-solid fa-rocket"></i>
+            Explore
+        </LinkButton>
+        <LinkButton class="button-outline button-flat" href={resolve("/(private)/create")}>
+            <i class="fa-solid fa-plus"></i>
+            Create
+        </LinkButton>
+        <LinkButton class="button-outline button-flat" href={resolve("/(private)/dashboard")}>
+            <i class="fa-solid fa-sliders"></i>
+            Dashboard
+        </LinkButton>
         <p class="clr-muted">|</p>
 
         <LinkButton href={resolve("/auth/login")} class="button-outline button-flat">Log in</LinkButton>

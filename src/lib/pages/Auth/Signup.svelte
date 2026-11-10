@@ -102,6 +102,6 @@
 
 <style>
     .form-container {
-        min-width: 30vw;
+        min-width: var(--authFormMinWidth);
     }
 </style>

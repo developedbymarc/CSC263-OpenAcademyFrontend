@@ -23,3 +23,15 @@ body {
     max-inline-size: var(--courseExploreContainerMaxWidth);
     margin-inline: auto;
 }
+
+.course-card-container:is([data-mode="stretch"]) {
+    display: grid;
+    grid-template-columns: 24% auto;
+}
+
+.course-card-container:is([data-mode="compact"]) {
+    display: flex;
+    flex-direction: column;
+
+    img { aspect-ratio: 1; }
+}

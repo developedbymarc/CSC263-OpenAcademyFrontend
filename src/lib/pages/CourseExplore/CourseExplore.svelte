@@ -15,6 +15,7 @@
 
 <div class="course-explore-container flex flex-direction-column gap-2">
     <section class="flex flex-direction-column gap-0-75">
+        <img class="course-explore__banner margin-block-end-1" src="" alt="Banner of {data.course.title}" />
         <div class="course-explore__header flex align-items-center justify-content-space-between">
             <h2>
                 { data.course.title }
@@ -36,3 +37,12 @@
         </div>
     </section>
 </div>
+
+<style>
+    .course-explore-container {
+        .course-explore__banner {
+            min-width: 100%;
+            aspect-ratio: 16 / 4;
+        }
+    }
+</style>

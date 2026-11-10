@@ -80,7 +80,8 @@ video {
 	height: 100%;
 
 	object-fit: cover;
-	border-radius: inherit;
+	border-radius: var(--globBorderRadius);
+	background-color: var(--bgOverlay);
 }
 
 :target {

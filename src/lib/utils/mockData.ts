@@ -14,7 +14,7 @@ export const mockData: IMockData = {
             instructorId: "0",
             status: ECourseStatus.Published,
             title: "2nd Grade Math",
-            description: "In this course, you will learn concepts such as addition, multiplication, division, etc.",
+            description: "In this course, you will learn concepts such as addition, multiplication, division, etc. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, voluptates temporibus. In quibusdam repellat praesentium quae vitae beatae sapiente odit, vel cupiditate illo magni quos error, pariatur nulla mollitia porro!",
             modules: [
                 {
                     id: "0",
@@ -65,7 +65,7 @@ export const mockData: IMockData = {
             instructorId: "2",
             status: ECourseStatus.Published,
             title: "Placeholder Course",
-            description: "Placeholder course description",
+            description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, voluptates temporibus. In quibusdam repellat praesentium quae vitae beatae sapiente odit, vel cupiditate illo magni quos error, pariatur nulla mollitia porro!",
             modules: [],
             categories: [],
             ...genMockTimeStamp()

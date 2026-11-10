@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from "#lib/components/Button/Button.svelte";
 	import CourseCard from "#lib/components/Card/CourseCard.svelte";
 	import SelectInput from "#lib/components/Inputs/SelectInput.svelte";
 	import type { ICourse } from "#lib/types/entities/course.ts";
@@ -6,6 +7,7 @@
 
     type IDataProps = { data: { courses: ICourse[] } };
 
+    let verticalCards = $state(false);
     let sortBy = $state("Relevance");
     let { data }: IDataProps = $props();
 </script>
@@ -28,11 +30,19 @@
                     containerClass="align-items-center gap-1"
                 />
             </div>
+            <div class="flex gap-1">
+                <Button onclick={() => verticalCards = false} class="button-flat button-outline" data-active={verticalCards}>
+                    <i class="fa-solid fa-grip-horizontal"></i>
+                </Button>
+                <Button onclick={() => verticalCards = true} class="button-flat button-outline" data-active={!verticalCards}>
+                    <i class="fa-solid fa-grip-vertical"></i>
+                </Button>
+            </div>
         </div>
         {#if data.courses.length > 0}
-            <div class="content__results flex flex-direction-column gap-1">
+            <div class="content__results gap-1-5" data-vertical={verticalCards}>
                 {#each data.courses as course, idx (idx)}
-                    <CourseCard {course} mode="" />
+                    <CourseCard {course} mode={verticalCards ? "compact" : "stretch"} />
                 {/each}
             </div>
         {:else}
@@ -48,6 +58,15 @@
         max-inline-size: var(--exploreContainerSize);
         margin-inline: auto;
 
+        .content__results[data-vertical="false"] {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content__results[data-vertical="true"] {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(444px, 1fr));
+        }
     }
 
     @container main (min-width: var(--mobileThreshold)) {

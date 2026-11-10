@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { SelectInputProps } from "#lib/types/components/types.ts";
 	import { capitalize } from "#lib/utils/utils.ts";
+	import { untrack } from "svelte";
 	import "./styles.css";
 
     let {
@@ -15,6 +16,10 @@
         hideLabel,
         label,
         ...rest }: SelectInputProps = $props();
+
+    $effect(() => {
+        untrack(() => value = options[0])
+    })
 </script>
 
 <div class="inpt-container flex {containerClass ?? ''}">

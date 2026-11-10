@@ -15,26 +15,26 @@ a.button {
     font-size: var(--fsButton);
     border: var(--globBorderThickness) solid var(--accent);
 
-    & > i { margin-inline-end: var(--btnIconMargin); }
+    &:has(i) { display: flex; align-items: center; gap: var(--btnIconGap) }
 
     &[data-accent="error"] {
         --accent: var(--clrError);
     }
 
+    &[data-active="true"],
     &:hover,
     &:focus-visible {
         --mActiveClr: hsl(from var(--accent) h s calc(l + var(--btnActiveStrength)));
 
         background-color: var(--mActiveClr);
         border-color: var(--mActiveClr);
-
     }
 }
 
 .button:is(.button-outline) {
     @include mixins.Translucent();
 
-    &:is(.button-flat) {
-        border: none;
-    }
+    // &:is(.button-flat) {
+    //     border: none;
+    // }
 }

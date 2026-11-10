@@ -22,7 +22,10 @@
             type="text"
         />
 
-        <Button class="button-outline button-flat">Search</Button>
+        <Button class="button-outline button-flat">
+            Search
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </Button>
     </div>
 </section>
 
