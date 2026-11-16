@@ -9,6 +9,7 @@ const passwInput = string().min(8);
 
 export type ISignUpData = InferType<typeof SignUpSchema>;
 export const SignUpSchema = object({
+    username: string().min(1).required(),
     firstName: string().min(1).required(),
     lastName: string().min(1).required(),
     email: string().email().required(),

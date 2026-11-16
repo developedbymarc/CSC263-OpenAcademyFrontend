@@ -24,6 +24,16 @@
 
         <h2 class="text-align-center"><span class="text-stroke clr-accent"><Logo /></span> / register</h2>
         <div class="form-container__inputs flex flex-direction-column gap-1-25">
+            <TextInput
+                {...$constraints.username}
+                bind:value={$form.username}
+                errors={$errors.username}
+
+                label="Username"
+                type="text"
+                placeholder="Enter username"
+                name="username"
+            />
             <div class="flex gap-1">
                 <TextInput
                     {...$constraints.firstName}

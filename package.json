@@ -17,6 +17,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
+		"@openapitools/openapi-generator-cli": "^2.42.2",
 		"@sveltejs/adapter-auto": "^8.0.0",
 		"@sveltejs/adapter-node": "^6.0.0",
 		"@sveltejs/kit": "^3.0.0",
@@ -46,6 +47,7 @@
 		"#lib/*": "./src/lib/*"
 	},
 	"dependencies": {
+		"axios": "^1.21.1",
 		"carta-md": "^4.11.5"
 	}
 }
