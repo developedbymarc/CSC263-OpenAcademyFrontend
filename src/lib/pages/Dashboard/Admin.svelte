@@ -28,7 +28,7 @@
 </section>
 
 <style>
-    @container main (min-width: var(--mobileThreshold)) {
+    @container main (min-width: 120ch) {
         .admin-summary-container { grid-template-columns: repeat(4, 1fr); }
     }
 </style>

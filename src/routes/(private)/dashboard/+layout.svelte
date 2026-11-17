@@ -19,7 +19,7 @@
 </section>
 
 <style>
-    @container main (min-width: var(--mobileThreshold)) {
+    @container main (min-width: 120ch) {
         .dashboard-container { display: grid; grid-template-columns: var(--dashboardGridColumns) }
     }
 </style>
