@@ -1,8 +1,12 @@
-<script>
+<script lang="ts">
+	import type { WhoAmIDto } from "#lib/api/index.ts";
+	import Button from "../Button/Button.svelte";
 	import { resolve } from "$app/paths";
 	import LinkButton from "../Button/LinkButton.svelte";
 	import Logo from "../Logo/Logo.svelte";
 	import Themer from "../Themer/Themer.svelte";
+
+	let { user = null }: { user?: WhoAmIDto | null } = $props();
 
 </script>
 
@@ -16,18 +20,27 @@
             <i class="fa-solid fa-rocket"></i>
             Explore
         </LinkButton>
-        <LinkButton class="button-outline button-flat" href={resolve("/(private)/create")}>
-            <i class="fa-solid fa-plus"></i>
-            Create
-        </LinkButton>
-        <LinkButton class="button-outline button-flat" href={resolve("/(private)/dashboard")}>
-            <i class="fa-solid fa-sliders"></i>
-            Dashboard
-        </LinkButton>
+        {#if user}
+            <LinkButton class="button-outline button-flat" href={resolve("/(private)/create")}>
+                <i class="fa-solid fa-plus"></i>
+                Create
+            </LinkButton>
+            <LinkButton class="button-outline button-flat" href={resolve("/(private)/dashboard")}>
+                <i class="fa-solid fa-sliders"></i>
+                Dashboard
+            </LinkButton>
+        {/if}
         <p class="clr-muted">|</p>
 
-        <LinkButton href={resolve("/auth/login")} class="button-outline button-flat">Log in</LinkButton>
-        <LinkButton href={resolve("/auth/signup")}>Sign up</LinkButton>
+        {#if user}
+            <span class="clr-muted">{user.firstName} {user.lastName}</span>
+            <form method="POST" action="/auth/logout">
+                <Button type="submit" class="button-outline button-flat">Log out</Button>
+            </form>
+        {:else}
+            <LinkButton href={resolve("/auth/login")} class="button-outline button-flat">Log in</LinkButton>
+            <LinkButton href={resolve("/auth/signup")}>Sign up</LinkButton>
+        {/if}
 
         <p class="clr-muted">|</p>
         <Themer />

@@ -59,7 +59,7 @@
             name="description"
         />
 
-        <MarkdownEditor {carta} />
+        <MarkdownEditor {carta} bind:value={$form.modules[moduleIdx].lessons[idx].content} />
     {/if}
 </div>
 

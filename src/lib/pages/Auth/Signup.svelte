@@ -5,14 +5,14 @@
     import { superForm } from 'sveltekit-superforms';
     import { untrack } from 'svelte';
 	import { yupClient } from "sveltekit-superforms/adapters";
+	import FormMessage from "#lib/components/FormMessage/FormMessage.svelte";
 	import { SignUpSchema, type ISignUpData } from "#lib/forms.ts";
 	import Logo from "#lib/components/Logo/Logo.svelte";
 	import SelectInput from "#lib/components/Inputs/SelectInput.svelte";
 	import { EUserRole } from "#lib/types/entities/user.ts";
-	import CheckboxInput from "#lib/components/Inputs/CheckboxInput.svelte";
 
     let { data } = $props();
-    const { form, constraints, errors, enhance } = superForm<ISignUpData>(untrack(() => data.form), {
+    const { form, constraints, errors, enhance, message, delayed } = superForm<ISignUpData, string>(untrack(() => data.form), {
       validators: yupClient(SignUpSchema),
       validationMethod: 'oninput'
     });
@@ -78,6 +78,17 @@
                 name="password"
             />
 
+            <TextInput
+                {...$constraints.confirmedPassword}
+                bind:value={$form.confirmedPassword}
+                errors={$errors.confirmedPassword}
+
+                label="Confirm Password"
+                type="password"
+                placeholder="Repeat password"
+                name="confirmedPassword"
+            />
+
             <SelectInput
                 {...$constraints.role}
                 bind:value={$form.role}
@@ -90,18 +101,10 @@
                 options={Object.values(EUserRole)}
             />
 
-            <CheckboxInput
-                {...$constraints.remember}
-                bind:checked={$form.remember}
-                errors={$errors.remember}
-
-                label="Remember Me?"
-                id="remember"
-                name="remember"
-            />
         </div>
+        <FormMessage message={$message} />
         <div class="flex flex-direction-column gap-1">
-            <Button type="submit">Register</Button>
+            <Button type="submit" disabled={$delayed}>Register</Button>
             <p class="text-center">
                 Already have an account?
                 <a href="{resolve('auth/login')}" data-active="true">Log in</a>

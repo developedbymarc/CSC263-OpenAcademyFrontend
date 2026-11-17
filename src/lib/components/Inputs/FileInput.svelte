@@ -4,7 +4,7 @@
 	import "./styles.css";
 
     let {
-        value = $bindable(""),
+        files = $bindable(),
         label,
         name,
         errors,
@@ -16,7 +16,7 @@
 
 <div class="inpt-container flex flex-direction-column">
     <label data-hide={hideLabel ?? false} for="{name}-inpt">{label}</label>
-    <input id="{name}-inpt" type="file" {accept} {name} {placeholder} {...rest} bind:value />
+    <input id="{name}-inpt" type="file" {accept} {name} {placeholder} {...rest} bind:files />
     {#if errors}
         <ul class="inpt-container__errors">
             {#each (errors ?? []) as error, idx (idx)}

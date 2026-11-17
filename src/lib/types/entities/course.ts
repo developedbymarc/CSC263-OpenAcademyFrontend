@@ -56,3 +56,9 @@ export interface ILesson extends IEntity, ITimeStamped {
 
     lessonAssets: ILessonAsset[];
 }
+
+/** Result of creating a course through the API (ids needed to continue, e.g. uploading lesson assets). */
+export interface ICourseCreated {
+    courseId: string;
+    lessons: { id: string, title: string }[];
+}

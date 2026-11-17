@@ -5,10 +5,11 @@
     import { superForm } from 'sveltekit-superforms';
     import { untrack } from 'svelte';
 	import { yupClient } from "sveltekit-superforms/adapters";
+	import FormMessage from "#lib/components/FormMessage/FormMessage.svelte";
 	import { ResetPasswordSchema, type IResetPasswordData } from "#lib/forms.ts";
 
     let { data } = $props();
-    const { form, constraints, errors, enhance } = superForm<IResetPasswordData>(untrack(() => data.form), {
+    const { form, constraints, errors, enhance, message } = superForm<IResetPasswordData, string>(untrack(() => data.form), {
       validators: yupClient(ResetPasswordSchema),
       validationMethod: 'oninput',
       dataType: "json"
@@ -37,11 +38,12 @@
                 errors={$errors.repeatPassword}
 
                 label="Confirm Password"
-                type="text"
+                type="password"
                 placeholder="Enter same password"
                 name="repeatPassword"
             />
         </div>
+        <FormMessage message={$message} />
         <div class="flex flex-direction-column gap-1">
             <Button type="submit">Reset Password</Button>
         </div>

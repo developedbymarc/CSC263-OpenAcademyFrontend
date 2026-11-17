@@ -7,10 +7,10 @@
 	import "#lib/styles/containers.css";
 	import "#lib/styles/common.scss"
 
-	let { children }: LayoutProps = $props();
+	let { children, data }: LayoutProps = $props();
 </script>
 
-<MainNav />
+<MainNav user={data.user} />
 <main class="main-container">
 	{@render children()}
 </main>

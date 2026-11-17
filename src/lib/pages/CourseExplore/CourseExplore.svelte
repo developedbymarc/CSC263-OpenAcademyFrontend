@@ -1,5 +1,6 @@
 <script lang="ts">
-	import LinkButton from "#lib/components/Button/LinkButton.svelte";
+	import { enhance } from "$app/forms";
+	import Button from "#lib/components/Button/Button.svelte";
 	import type { ICourse } from "#lib/types/entities/course.ts";
 	import { humanizeDate } from "#lib/utils/utils.ts";
 	import { untrack } from "svelte";
@@ -7,7 +8,7 @@
 	import "#lib/styles/containers.css";
 
 	let lessonCount = $state(0);
-    let { data } : { data: { course: ICourse } } = $props();
+    let { data, form } : { data: { course: ICourse }, form?: { enrolled?: boolean, enrollError?: string } } = $props();
     $effect(() => {
         untrack(() => data.course.modules.forEach(x => lessonCount += x.lessons.length))
     })
@@ -21,8 +22,11 @@
                 { data.course.title }
                 <span class="clr-muted fs1"><i> - Last updated: { humanizeDate(data.course.updatedAt) }</i></span>
             </h2>
-            <LinkButton>Enroll</LinkButton>
+            <form method="POST" action="?/enroll" use:enhance>
+                <Button type="submit" disabled={form?.enrolled}>{form?.enrolled ? "Enrolled" : "Enroll"}</Button>
+            </form>
         </div>
+        {#if form?.enrollError}<p class="clr-error">{form.enrollError}</p>{/if}
         <article>{ data.course.description }</article>
     </section>
     <section class="course-explore__content">

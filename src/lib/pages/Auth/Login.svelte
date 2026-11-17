@@ -5,10 +5,12 @@
     import { superForm } from 'sveltekit-superforms';
     import { untrack } from 'svelte';
 	import { yupClient } from "sveltekit-superforms/adapters";
+	import FormMessage from "#lib/components/FormMessage/FormMessage.svelte";
+	import CheckboxInput from "#lib/components/Inputs/CheckboxInput.svelte";
 	import { LoginSchema, type ILoginData } from "#lib/forms.ts";
 
     let { data } = $props();
-    const { form, constraints, errors, enhance } = superForm<ILoginData>(untrack(() => data.form), {
+    const { form, constraints, errors, enhance, message, delayed } = superForm<ILoginData, string>(untrack(() => data.form), {
       validators: yupClient(LoginSchema),
       validationMethod: 'oninput'
     });
@@ -40,9 +42,20 @@
                 placeholder="Enter password"
                 name="password"
             />
+            <CheckboxInput
+                {...$constraints.remember}
+                bind:checked={$form.remember}
+                errors={$errors.remember}
+
+                label="Remember Me?"
+                id="remember"
+                name="remember"
+            />
         </div>
+        <FormMessage message={$message} />
         <div class="flex flex-direction-column gap-1">
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={$delayed}>Login</Button>
+            <p class="text-center"><a href="{resolve('/auth/forgot-passw')}" data-active="true">Forgot password?</a></p>
             <p class="text-center">
                 Don't have an account?
                 <a href="{resolve('auth/signup')}" data-active="true">Sign up</a>

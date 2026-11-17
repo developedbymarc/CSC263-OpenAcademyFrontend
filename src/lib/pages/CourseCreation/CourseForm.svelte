@@ -9,9 +9,12 @@
 	import ModuleForm from "./ModuleForm.svelte";
 	import Card from "#lib/components/Card/Card.svelte";
 	import Logo from "#lib/components/Logo/Logo.svelte";
+	import FormMessage from "#lib/components/FormMessage/FormMessage.svelte";
+	import { resolve } from "$app/paths";
+	import type { ICourseCreated } from "#lib/types/entities/course.ts";
 
 	let { data } = $props();
-    const { form, constraints, errors, enhance, reset } = superForm<ICourseData>(untrack(() => data.form), {
+    const { form, constraints, errors, enhance, reset, message, delayed } = superForm<ICourseData, string | ICourseCreated>(untrack(() => data.form), {
       validators: yupClient(CourseSchema),
       validationMethod: "onsubmit",
       dataType: "json"
@@ -68,10 +71,24 @@
         <Button onclick={addModule} type="button" class="button-outline button-flat">Add Module</Button>
     </div>
 
+    {#if typeof $message === 'object' && $message}
+        <Card accent="accent">
+            <h3>Course created</h3>
+            <p>Add images and videos to your lessons:</p>
+            <ul>
+                {#each $message.lessons as lesson (lesson.id)}
+                    <li><a data-active="true" href={resolve('/(private)/lessons/[lessonId]/assets', { lessonId: lesson.id })}>{lesson.title}</a></li>
+                {/each}
+            </ul>
+        </Card>
+    {:else}
+        <FormMessage message={$message as string | undefined} />
+    {/if}
+
     <div class="flex gap-1 margin-block-start-2 justify-content-space-between">
-        <Button type="submit">Submit Course</Button>
+        <Button type="submit" disabled={$delayed}>Submit Course</Button>
         <div class="flex align-items-center gap-1">
-            <Button type="submit">Save as Draft</Button>
+            <!-- The API has no draft/publish switch yet: new courses are created with the backend's default status. -->
             <Button onclick={() => reset()} type="button" accent="error">Reset</Button>
         </div>
     </div>

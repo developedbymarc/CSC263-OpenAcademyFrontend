@@ -1,5 +1,3 @@
-import { mockData } from "#lib/utils/mockData.ts";
+import { listCourses } from "#lib/server/courses.ts";
 
-export const load = async () => {
-    return { courses: mockData.courses }
-};
+export const load = async () => ({ courses: await listCourses() });
