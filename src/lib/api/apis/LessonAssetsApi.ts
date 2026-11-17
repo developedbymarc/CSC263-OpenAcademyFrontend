@@ -29,7 +29,15 @@ import {
     ApiResponseOfObjectToJSON,
 } from '../models/ApiResponseOfObject';
 
-export interface ApiLessonsLessonIdAssetsAssetIdDeleteRequest {
+export interface CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRequest {
+    /**
+     * 
+     */
+    courseId: string;
+    /**
+     * 
+     */
+    moduleId: string;
     /**
      * 
      */
@@ -40,14 +48,30 @@ export interface ApiLessonsLessonIdAssetsAssetIdDeleteRequest {
     assetId: string;
 }
 
-export interface ApiLessonsLessonIdAssetsGetRequest {
+export interface CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRequest {
+    /**
+     * 
+     */
+    courseId: string;
+    /**
+     * 
+     */
+    moduleId: string;
     /**
      * 
      */
     lessonId: string;
 }
 
-export interface ApiLessonsLessonIdAssetsImagesPostRequest {
+export interface CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRequest {
+    /**
+     * 
+     */
+    courseId: string;
+    /**
+     * 
+     */
+    moduleId: string;
     /**
      * 
      */
@@ -58,7 +82,15 @@ export interface ApiLessonsLessonIdAssetsImagesPostRequest {
     file?: Blob;
 }
 
-export interface ApiLessonsLessonIdAssetsVideosPostRequest {
+export interface CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRequest {
+    /**
+     * 
+     */
+    courseId: string;
+    /**
+     * 
+     */
+    moduleId: string;
     /**
      * 
      */
@@ -75,20 +107,34 @@ export interface ApiLessonsLessonIdAssetsVideosPostRequest {
 export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
-     * Creates request options for apiLessonsLessonIdAssetsAssetIdDelete without sending the request
+     * Creates request options for coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDelete without sending the request
      */
-    async apiLessonsLessonIdAssetsAssetIdDeleteRequestOpts(requestParameters: ApiLessonsLessonIdAssetsAssetIdDeleteRequest): Promise<runtime.RequestOpts> {
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRequestOpts(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['courseId'] == null) {
+            throw new runtime.RequiredError(
+                'courseId',
+                'Required parameter "courseId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDelete().'
+            );
+        }
+
+        if (requestParameters['moduleId'] == null) {
+            throw new runtime.RequiredError(
+                'moduleId',
+                'Required parameter "moduleId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDelete().'
+            );
+        }
+
         if (requestParameters['lessonId'] == null) {
             throw new runtime.RequiredError(
                 'lessonId',
-                'Required parameter "lessonId" was null or undefined when calling apiLessonsLessonIdAssetsAssetIdDelete().'
+                'Required parameter "lessonId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDelete().'
             );
         }
 
         if (requestParameters['assetId'] == null) {
             throw new runtime.RequiredError(
                 'assetId',
-                'Required parameter "assetId" was null or undefined when calling apiLessonsLessonIdAssetsAssetIdDelete().'
+                'Required parameter "assetId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDelete().'
             );
         }
 
@@ -97,7 +143,9 @@ export class LessonAssetsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/api/lessons/{lessonId}/assets/{assetId}`;
+        let urlPath = `/Courses/{courseId}/Modules/{moduleId}/Lessons/{lessonId}/Assets/{assetId}`;
+        urlPath = urlPath.replace('{courseId}', encodeURIComponent(String(requestParameters['courseId'])));
+        urlPath = urlPath.replace('{moduleId}', encodeURIComponent(String(requestParameters['moduleId'])));
         urlPath = urlPath.replace('{lessonId}', encodeURIComponent(String(requestParameters['lessonId'])));
         urlPath = urlPath.replace('{assetId}', encodeURIComponent(String(requestParameters['assetId'])));
 
@@ -111,8 +159,8 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsAssetIdDeleteRaw(requestParameters: ApiLessonsLessonIdAssetsAssetIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfObject>> {
-        const requestOptions = await this.apiLessonsLessonIdAssetsAssetIdDeleteRequestOpts(requestParameters);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRaw(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfObject>> {
+        const requestOptions = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfObjectFromJSON(jsonValue));
@@ -120,19 +168,33 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsAssetIdDelete(requestParameters: ApiLessonsLessonIdAssetsAssetIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfObject> {
-        const response = await this.apiLessonsLessonIdAssetsAssetIdDeleteRaw(requestParameters, initOverrides);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDelete(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfObject> {
+        const response = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsAssetIdDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for apiLessonsLessonIdAssetsGet without sending the request
+     * Creates request options for coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGet without sending the request
      */
-    async apiLessonsLessonIdAssetsGetRequestOpts(requestParameters: ApiLessonsLessonIdAssetsGetRequest): Promise<runtime.RequestOpts> {
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRequestOpts(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['courseId'] == null) {
+            throw new runtime.RequiredError(
+                'courseId',
+                'Required parameter "courseId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGet().'
+            );
+        }
+
+        if (requestParameters['moduleId'] == null) {
+            throw new runtime.RequiredError(
+                'moduleId',
+                'Required parameter "moduleId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGet().'
+            );
+        }
+
         if (requestParameters['lessonId'] == null) {
             throw new runtime.RequiredError(
                 'lessonId',
-                'Required parameter "lessonId" was null or undefined when calling apiLessonsLessonIdAssetsGet().'
+                'Required parameter "lessonId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGet().'
             );
         }
 
@@ -141,7 +203,9 @@ export class LessonAssetsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/api/lessons/{lessonId}/assets`;
+        let urlPath = `/Courses/{courseId}/Modules/{moduleId}/Lessons/{lessonId}/Assets`;
+        urlPath = urlPath.replace('{courseId}', encodeURIComponent(String(requestParameters['courseId'])));
+        urlPath = urlPath.replace('{moduleId}', encodeURIComponent(String(requestParameters['moduleId'])));
         urlPath = urlPath.replace('{lessonId}', encodeURIComponent(String(requestParameters['lessonId'])));
 
         return {
@@ -154,8 +218,8 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsGetRaw(requestParameters: ApiLessonsLessonIdAssetsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfIReadOnlyListOfLessonAssetDto>> {
-        const requestOptions = await this.apiLessonsLessonIdAssetsGetRequestOpts(requestParameters);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRaw(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfIReadOnlyListOfLessonAssetDto>> {
+        const requestOptions = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfIReadOnlyListOfLessonAssetDtoFromJSON(jsonValue));
@@ -163,19 +227,33 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsGet(requestParameters: ApiLessonsLessonIdAssetsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfIReadOnlyListOfLessonAssetDto> {
-        const response = await this.apiLessonsLessonIdAssetsGetRaw(requestParameters, initOverrides);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGet(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfIReadOnlyListOfLessonAssetDto> {
+        const response = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for apiLessonsLessonIdAssetsImagesPost without sending the request
+     * Creates request options for coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPost without sending the request
      */
-    async apiLessonsLessonIdAssetsImagesPostRequestOpts(requestParameters: ApiLessonsLessonIdAssetsImagesPostRequest): Promise<runtime.RequestOpts> {
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRequestOpts(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['courseId'] == null) {
+            throw new runtime.RequiredError(
+                'courseId',
+                'Required parameter "courseId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPost().'
+            );
+        }
+
+        if (requestParameters['moduleId'] == null) {
+            throw new runtime.RequiredError(
+                'moduleId',
+                'Required parameter "moduleId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPost().'
+            );
+        }
+
         if (requestParameters['lessonId'] == null) {
             throw new runtime.RequiredError(
                 'lessonId',
-                'Required parameter "lessonId" was null or undefined when calling apiLessonsLessonIdAssetsImagesPost().'
+                'Required parameter "lessonId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPost().'
             );
         }
 
@@ -204,7 +282,9 @@ export class LessonAssetsApi extends runtime.BaseAPI {
         }
 
 
-        let urlPath = `/api/lessons/{lessonId}/assets/images`;
+        let urlPath = `/Courses/{courseId}/Modules/{moduleId}/Lessons/{lessonId}/Assets/images`;
+        urlPath = urlPath.replace('{courseId}', encodeURIComponent(String(requestParameters['courseId'])));
+        urlPath = urlPath.replace('{moduleId}', encodeURIComponent(String(requestParameters['moduleId'])));
         urlPath = urlPath.replace('{lessonId}', encodeURIComponent(String(requestParameters['lessonId'])));
 
         return {
@@ -218,8 +298,8 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsImagesPostRaw(requestParameters: ApiLessonsLessonIdAssetsImagesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfLessonAssetDto>> {
-        const requestOptions = await this.apiLessonsLessonIdAssetsImagesPostRequestOpts(requestParameters);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRaw(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfLessonAssetDto>> {
+        const requestOptions = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfLessonAssetDtoFromJSON(jsonValue));
@@ -227,19 +307,33 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsImagesPost(requestParameters: ApiLessonsLessonIdAssetsImagesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfLessonAssetDto> {
-        const response = await this.apiLessonsLessonIdAssetsImagesPostRaw(requestParameters, initOverrides);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPost(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfLessonAssetDto> {
+        const response = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsImagesPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for apiLessonsLessonIdAssetsVideosPost without sending the request
+     * Creates request options for coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPost without sending the request
      */
-    async apiLessonsLessonIdAssetsVideosPostRequestOpts(requestParameters: ApiLessonsLessonIdAssetsVideosPostRequest): Promise<runtime.RequestOpts> {
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRequestOpts(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['courseId'] == null) {
+            throw new runtime.RequiredError(
+                'courseId',
+                'Required parameter "courseId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPost().'
+            );
+        }
+
+        if (requestParameters['moduleId'] == null) {
+            throw new runtime.RequiredError(
+                'moduleId',
+                'Required parameter "moduleId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPost().'
+            );
+        }
+
         if (requestParameters['lessonId'] == null) {
             throw new runtime.RequiredError(
                 'lessonId',
-                'Required parameter "lessonId" was null or undefined when calling apiLessonsLessonIdAssetsVideosPost().'
+                'Required parameter "lessonId" was null or undefined when calling coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPost().'
             );
         }
 
@@ -268,7 +362,9 @@ export class LessonAssetsApi extends runtime.BaseAPI {
         }
 
 
-        let urlPath = `/api/lessons/{lessonId}/assets/videos`;
+        let urlPath = `/Courses/{courseId}/Modules/{moduleId}/Lessons/{lessonId}/Assets/videos`;
+        urlPath = urlPath.replace('{courseId}', encodeURIComponent(String(requestParameters['courseId'])));
+        urlPath = urlPath.replace('{moduleId}', encodeURIComponent(String(requestParameters['moduleId'])));
         urlPath = urlPath.replace('{lessonId}', encodeURIComponent(String(requestParameters['lessonId'])));
 
         return {
@@ -282,8 +378,8 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsVideosPostRaw(requestParameters: ApiLessonsLessonIdAssetsVideosPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfLessonAssetDto>> {
-        const requestOptions = await this.apiLessonsLessonIdAssetsVideosPostRequestOpts(requestParameters);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRaw(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfLessonAssetDto>> {
+        const requestOptions = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfLessonAssetDtoFromJSON(jsonValue));
@@ -291,8 +387,8 @@ export class LessonAssetsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiLessonsLessonIdAssetsVideosPost(requestParameters: ApiLessonsLessonIdAssetsVideosPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfLessonAssetDto> {
-        const response = await this.apiLessonsLessonIdAssetsVideosPostRaw(requestParameters, initOverrides);
+    async coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPost(requestParameters: CoursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfLessonAssetDto> {
+        const response = await this.coursesCourseIdModulesModuleIdLessonsLessonIdAssetsVideosPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

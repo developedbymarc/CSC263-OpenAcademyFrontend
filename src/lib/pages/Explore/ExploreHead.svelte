@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
 	import Button from "#lib/components/Button/Button.svelte";
 	import TextInput from "#lib/components/Inputs/TextInput.svelte";
+
+    // `form` ties the input and the button to the filters <form> in Explore.svelte, so one GET submits everything.
+    let { title = $bindable(""), formId }: { title?: string, formId: string } = $props();
 </script>
 
 <section class="explore-head-container flex flex-direction-column gap-1-5 align-items-center">
@@ -15,14 +18,16 @@
 
     <div class="explore-head__inpt-container flex align-items-center gap-1">
         <TextInput
+            bind:value={title}
+            form={formId}
             hideLabel={true}
             label="Search content"
-            name="query"
+            name="title"
             placeholder="Search content..."
             type="text"
         />
 
-        <Button class="button-outline button-flat">
+        <Button type="submit" form={formId} class="button-outline button-flat">
             Search
             <i class="fa-solid fa-magnifying-glass"></i>
         </Button>

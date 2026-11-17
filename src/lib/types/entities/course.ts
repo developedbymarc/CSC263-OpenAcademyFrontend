@@ -62,3 +62,59 @@ export interface ICourseCreated {
     courseId: string;
     lessons: { id: string, title: string }[];
 }
+
+// ---- API view models -------------------------------------------------------------------------------------
+// The entity interfaces above mirror the database. What the backend actually returns is smaller (no timestamps,
+// no nested modules on the catalogue), so pages are typed with these instead. Mapped in `$lib/server/courses.ts`.
+
+export interface ICourseCategoryView { id: number; name: string; slug: string }
+
+/** One row of the public catalogue (GET /Courses). */
+export interface ICourseSummary {
+    id: string;
+    title: string;
+    description: string;
+    thumbnailUrl: string | null;
+    categories: ICourseCategoryView[];
+}
+
+export interface ILessonAssetView {
+    id: string;
+    type: EAssetType;
+    contentType: string;
+    sizeBytes: number;
+    durationSeconds: number | null;
+    order: number;
+    url: string;
+}
+
+export interface ILessonView {
+    id: string;
+    moduleId: string;
+    title: string;
+    description: string;
+    content: string;
+    order: number;
+}
+
+export interface IModuleView {
+    id: string;
+    courseId: string;
+    title: string;
+    description: string;
+    order: number;
+    lessons: ILessonView[];
+}
+
+/** A course with its full module/lesson tree. */
+export interface ICourseDetail extends ICourseSummary {
+    modules: IModuleView[];
+}
+
+export interface ICatalogPage {
+    items: ICourseSummary[];
+    page: number;
+    pageSize: number;
+    totalCount: number;
+    totalPages: number;
+}

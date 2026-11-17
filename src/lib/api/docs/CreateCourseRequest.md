@@ -8,7 +8,7 @@ Name | Type
 ------------ | -------------
 `title` | string
 `description` | string
-`categoryIds` | [Array&lt;CreateCourseRequestCategoryIdsInner&gt;](CreateCourseRequestCategoryIdsInner.md)
+`categoryIds` | [Array&lt;CourseCatalogPageDtoPage&gt;](CourseCatalogPageDtoPage.md)
 
 ## Example
 

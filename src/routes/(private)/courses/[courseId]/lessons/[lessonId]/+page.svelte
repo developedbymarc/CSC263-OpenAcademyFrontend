@@ -4,4 +4,4 @@
 	let { data } = $props();
 </script>
 
-<Lesson course={data.course} lesson={data.lesson} />
+<Lesson course={data.course} lesson={data.lesson} assets={data.assets} />

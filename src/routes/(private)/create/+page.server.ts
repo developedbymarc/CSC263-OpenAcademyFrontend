@@ -2,7 +2,7 @@ import { CourseSchema, type ICourseData } from '#lib/forms.js';
 import { superValidate, message } from 'sveltekit-superforms';
 import { fail } from '@sveltejs/kit';
 import { yup } from 'sveltekit-superforms/adapters';
-import { applyApiError, call, num } from '#lib/server/api.ts';
+import { applyApiError, call, toInt } from '#lib/server/api.ts';
 import type { ICourseCreated } from '#lib/types/entities/course.ts';
 
 export const load = async () => {
@@ -27,9 +27,9 @@ export const actions = {
     const created: ICourseCreated = { courseId, lessons: [] };
     for (const [mIdx, mod] of form.data.modules.entries()) {
       const m = await call(() =>
-        api.modules.apiCoursesCourseIdModulesPost({
+        api.modules.coursesCourseIdModulesPost({
           courseId,
-          createModuleRequest: { title: mod.title, description: mod.description, order: num(mod.order ?? mIdx) }
+          createModuleRequest: { title: mod.title, description: mod.description, order: toInt(mod.order ?? mIdx) }
         })
       );
       if (!m.ok) return failPartial(form, `Course ${courseId} was created, but module "${mod.title}" failed: ${m.error.message}`);
@@ -37,10 +37,11 @@ export const actions = {
 
       for (const [lIdx, lesson] of mod.lessons.entries()) {
         const l = await call(() =>
-          api.lessons.apiModulesModuleIdLessonsPost({
+          api.lessons.coursesCourseIdModulesModuleIdLessonsPost({
+            courseId,
             moduleId,
             createLessonRequest: {
-              title: lesson.title, description: lesson.description, content: lesson.content, order: num(lesson.order ?? lIdx)
+              title: lesson.title, description: lesson.description, content: lesson.content, order: toInt(lesson.order ?? lIdx)
             }
           })
         );

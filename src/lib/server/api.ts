@@ -4,7 +4,7 @@ import { message, setError, type SuperValidated } from 'sveltekit-superforms';
 import {
 	AdminApi, AuthApi, BaseAPI, Configuration, CoursesApi, LessonApi, LessonAssetsApi,
 	MeApi, ModuleApi, ResponseError, RootApi,
-	type CreateCourseRequestCategoryIdsInner, type Middleware
+	type CourseCatalogPageDtoPage, type Middleware
 } from '#lib/api/index.ts';
 
 /** Name of the antiforgery header the backend expects (ASP.NET default is "X-CSRF-TOKEN"). */
@@ -13,8 +13,15 @@ const CSRF_HEADER = 'X-CSRF-TOKEN';
 const AVATAR_FIELD = 'file';
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
 
-/** The generator emitted `{}` for every int/long/Guid-less number. This casts a number to that type. */
-export const num = (x: number) => x as unknown as CreateCourseRequestCategoryIdsInner;
+/**
+ * The generator emits an empty interface (`CourseCatalogPageDtoPage`, `{}`) for every int/long in the OpenAPI document
+ * (order, page, pageSize, totalCount, ids, sizeBytes, ...). At runtime these are plain JSON numbers.
+ */
+export type ApiInt = CourseCatalogPageDtoPage;
+/** number -> generated `{}` int type (for request bodies / query params). */
+export const toInt = (x: number) => x as unknown as ApiInt;
+/** generated `{}` int type -> number (for response values). */
+export const fromInt = (x: ApiInt | null | undefined, fallback = 0) => (typeof x === 'number' ? x : Number(x ?? fallback));
 
 // ---------- errors ----------
 

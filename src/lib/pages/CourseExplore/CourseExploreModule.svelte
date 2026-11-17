@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Button from "#lib/components/Button/Button.svelte";
 	import Card from "#lib/components/Card/Card.svelte";
-	import type { ILesson } from "#lib/types/entities/course.ts";
+	import type { ILessonView } from "#lib/types/entities/course.ts";
 
-	type IProps = { title: string, description: string, lessons: ILesson[] };
+	type IProps = { title: string, description: string, lessons: ILessonView[] };
 
 	let expand: boolean = $state(false);
     let { title, description, lessons }: IProps = $props();
@@ -24,7 +24,7 @@
         <div class="flex flex-direction-column gap-0-5">
             <h3>Lessons</h3>
             <div>
-                {#each lessons as lesson, idx (idx)}
+                {#each lessons as lesson, idx (lesson.id)}
                     <h3>{idx + 1}) { lesson.title }</h3>
                     <p class="margin-inline-1">{ lesson.description }</p>
                 {/each}

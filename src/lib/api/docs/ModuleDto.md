@@ -10,7 +10,7 @@ Name | Type
 `courseId` | string
 `title` | string
 `description` | string
-`order` | [CreateCourseRequestCategoryIdsInner](CreateCourseRequestCategoryIdsInner.md)
+`order` | [CourseCatalogPageDtoPage](CourseCatalogPageDtoPage.md)
 `status` | number
 
 ## Example

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
-	import type { ICourse } from "#lib/types/entities/course.ts";
+	import type { ICourseDetail } from "#lib/types/entities/course.ts";
 
-	let { course }: { course: ICourse } = $props();
+	let { course }: { course: ICourseDetail } = $props();
 
 	const modules = $derived([...course.modules].sort((a, b) => a.order - b.order));
 	const lessonHref = (lessonId: string) =>

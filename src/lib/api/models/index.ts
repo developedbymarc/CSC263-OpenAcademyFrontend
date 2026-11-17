@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './ApiError';
+export * from './ApiResponseOfCourseCatalogPageDto';
 export * from './ApiResponseOfCourseDto';
 export * from './ApiResponseOfCsrfTokenDto';
 export * from './ApiResponseOfEnrollmentDto';
@@ -8,15 +9,22 @@ export * from './ApiResponseOfIEnumerableOfDeviceSessionDto';
 export * from './ApiResponseOfIEnumerableOfGetAllAdminsDto';
 export * from './ApiResponseOfIEnumerableOfGetAllModeratorsDto';
 export * from './ApiResponseOfIReadOnlyListOfLessonAssetDto';
+export * from './ApiResponseOfIReadOnlyListOfLessonDto';
+export * from './ApiResponseOfIReadOnlyListOfModuleDto';
 export * from './ApiResponseOfLessonAssetDto';
 export * from './ApiResponseOfLessonDto';
 export * from './ApiResponseOfModuleDto';
 export * from './ApiResponseOfObject';
 export * from './ApiResponseOfWhoAmIDto';
 export * from './ApiSuccessMessage';
+export * from './CourseCatalogItemDto';
+export * from './CourseCatalogPageDto';
+export * from './CourseCatalogPageDtoPage';
+export * from './CourseCategoryDto';
 export * from './CourseDto';
+export * from './CoursesGetPageParameter';
+export * from './CoursesGetPageSizeParameter';
 export * from './CreateCourseRequest';
-export * from './CreateCourseRequestCategoryIdsInner';
 export * from './CreateLessonRequest';
 export * from './CreateModuleRequest';
 export * from './CsrfTokenDto';

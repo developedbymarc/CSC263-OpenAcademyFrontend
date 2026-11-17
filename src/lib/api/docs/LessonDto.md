@@ -11,7 +11,7 @@ Name | Type
 `title` | string
 `description` | string
 `content` | string
-`order` | [CreateCourseRequestCategoryIdsInner](CreateCourseRequestCategoryIdsInner.md)
+`order` | [CourseCatalogPageDtoPage](CourseCatalogPageDtoPage.md)
 `status` | number
 
 ## Example

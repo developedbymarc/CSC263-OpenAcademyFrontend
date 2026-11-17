@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateCourseRequestCategoryIdsInner } from './CreateCourseRequestCategoryIdsInner';
+import type { CourseCatalogPageDtoPage } from './CourseCatalogPageDtoPage';
 import {
-    CreateCourseRequestCategoryIdsInnerFromJSON,
-    CreateCourseRequestCategoryIdsInnerFromJSONTyped,
-    CreateCourseRequestCategoryIdsInnerToJSON,
-    CreateCourseRequestCategoryIdsInnerToJSONTyped,
-} from './CreateCourseRequestCategoryIdsInner';
+    CourseCatalogPageDtoPageFromJSON,
+    CourseCatalogPageDtoPageFromJSONTyped,
+    CourseCatalogPageDtoPageToJSON,
+    CourseCatalogPageDtoPageToJSONTyped,
+} from './CourseCatalogPageDtoPage';
 
 /**
  * 
@@ -38,7 +38,7 @@ export interface CreateCourseRequest {
     /**
      * 
      */
-    categoryIds?: Array<CreateCourseRequestCategoryIdsInner> | null;
+    categoryIds?: Array<CourseCatalogPageDtoPage> | null;
 }
 
 /**
@@ -62,7 +62,7 @@ export function CreateCourseRequestFromJSONTyped(json: any, ignoreDiscriminator:
         
         'title': json['title'],
         'description': json['description'],
-        'categoryIds': json['categoryIds'] === undefined ? undefined : json['categoryIds'] === null ? null : ((json['categoryIds'] as Array<any>).map(CreateCourseRequestCategoryIdsInnerFromJSON)),
+        'categoryIds': json['categoryIds'] === undefined ? undefined : json['categoryIds'] === null ? null : ((json['categoryIds'] as Array<any>).map(CourseCatalogPageDtoPageFromJSON)),
     };
 }
 
@@ -79,7 +79,7 @@ export function CreateCourseRequestToJSONTyped(value?: CreateCourseRequest | nul
         
         'title': value['title'],
         'description': value['description'],
-        'categoryIds': value['categoryIds'] == null ? undefined : ((value['categoryIds'] as Array<any>).map(CreateCourseRequestCategoryIdsInnerToJSON)),
+        'categoryIds': value['categoryIds'] == null ? undefined : ((value['categoryIds'] as Array<any>).map(CourseCatalogPageDtoPageToJSON)),
     };
 }
 

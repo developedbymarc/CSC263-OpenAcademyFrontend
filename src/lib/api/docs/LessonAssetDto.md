@@ -11,7 +11,7 @@ Name | Type
 `contentType` | string
 `sizeBytes` | [MeAvatarPutRequestLength](MeAvatarPutRequestLength.md)
 `durationSeconds` | [LessonAssetDtoDurationSeconds](LessonAssetDtoDurationSeconds.md)
-`order` | [CreateCourseRequestCategoryIdsInner](CreateCourseRequestCategoryIdsInner.md)
+`order` | [CourseCatalogPageDtoPage](CourseCatalogPageDtoPage.md)
 `url` | string
 `urlExpiresAt` | Date
 

@@ -13,13 +13,13 @@
  */
 
 import { mapValues, parseDate, parseDateTime, serializeDate, serializeDateTime } from '../runtime';
-import type { CreateCourseRequestCategoryIdsInner } from './CreateCourseRequestCategoryIdsInner';
+import type { CourseCatalogPageDtoPage } from './CourseCatalogPageDtoPage';
 import {
-    CreateCourseRequestCategoryIdsInnerFromJSON,
-    CreateCourseRequestCategoryIdsInnerFromJSONTyped,
-    CreateCourseRequestCategoryIdsInnerToJSON,
-    CreateCourseRequestCategoryIdsInnerToJSONTyped,
-} from './CreateCourseRequestCategoryIdsInner';
+    CourseCatalogPageDtoPageFromJSON,
+    CourseCatalogPageDtoPageFromJSONTyped,
+    CourseCatalogPageDtoPageToJSON,
+    CourseCatalogPageDtoPageToJSONTyped,
+} from './CourseCatalogPageDtoPage';
 import type { LessonAssetDtoDurationSeconds } from './LessonAssetDtoDurationSeconds';
 import {
     LessonAssetDtoDurationSecondsFromJSON,
@@ -64,7 +64,7 @@ export interface LessonAssetDto {
     /**
      * 
      */
-    order: CreateCourseRequestCategoryIdsInner;
+    order: CourseCatalogPageDtoPage;
     /**
      * 
      */
@@ -105,7 +105,7 @@ export function LessonAssetDtoFromJSONTyped(json: any, ignoreDiscriminator: bool
         'contentType': json['contentType'],
         'sizeBytes': MeAvatarPutRequestLengthFromJSON(json['sizeBytes']),
         'durationSeconds': LessonAssetDtoDurationSecondsFromJSON(json['durationSeconds']),
-        'order': CreateCourseRequestCategoryIdsInnerFromJSON(json['order']),
+        'order': CourseCatalogPageDtoPageFromJSON(json['order']),
         'url': json['url'],
         'urlExpiresAt': (json['urlExpiresAt'] == null ? json['urlExpiresAt'] : parseDateTime(json['urlExpiresAt'])),
     };
@@ -127,7 +127,7 @@ export function LessonAssetDtoToJSONTyped(value?: LessonAssetDto | null, ignoreD
         'contentType': value['contentType'],
         'sizeBytes': MeAvatarPutRequestLengthToJSON(value['sizeBytes']),
         'durationSeconds': LessonAssetDtoDurationSecondsToJSON(value['durationSeconds']),
-        'order': CreateCourseRequestCategoryIdsInnerToJSON(value['order']),
+        'order': CourseCatalogPageDtoPageToJSON(value['order']),
         'url': value['url'],
         'urlExpiresAt': value['urlExpiresAt'] == null ? value['urlExpiresAt'] : serializeDateTime(value['urlExpiresAt']),
     };

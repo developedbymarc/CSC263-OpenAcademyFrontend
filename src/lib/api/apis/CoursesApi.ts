@@ -14,6 +14,11 @@
 
 import * as runtime from '../runtime';
 import {
+    type ApiResponseOfCourseCatalogPageDto,
+    ApiResponseOfCourseCatalogPageDtoFromJSON,
+    ApiResponseOfCourseCatalogPageDtoToJSON,
+} from '../models/ApiResponseOfCourseCatalogPageDto';
+import {
     type ApiResponseOfCourseDto,
     ApiResponseOfCourseDtoFromJSON,
     ApiResponseOfCourseDtoToJSON,
@@ -23,6 +28,16 @@ import {
     ApiResponseOfEnrollmentDtoFromJSON,
     ApiResponseOfEnrollmentDtoToJSON,
 } from '../models/ApiResponseOfEnrollmentDto';
+import {
+    type CoursesGetPageParameter,
+    CoursesGetPageParameterFromJSON,
+    CoursesGetPageParameterToJSON,
+} from '../models/CoursesGetPageParameter';
+import {
+    type CoursesGetPageSizeParameter,
+    CoursesGetPageSizeParameterFromJSON,
+    CoursesGetPageSizeParameterToJSON,
+} from '../models/CoursesGetPageSizeParameter';
 import {
     type CreateCourseRequest,
     CreateCourseRequestFromJSON,
@@ -34,6 +49,25 @@ export interface CoursesCourseIdEnrollmentsPostRequest {
      * 
      */
     courseId: string;
+}
+
+export interface CoursesGetRequest {
+    /**
+     * 
+     */
+    title?: string;
+    /**
+     * 
+     */
+    category?: string;
+    /**
+     * 
+     */
+    page?: CoursesGetPageParameter;
+    /**
+     * 
+     */
+    pageSize?: CoursesGetPageSizeParameter;
 }
 
 export interface CoursesPostRequest {
@@ -88,6 +122,57 @@ export class CoursesApi extends runtime.BaseAPI {
      */
     async coursesCourseIdEnrollmentsPost(requestParameters: CoursesCourseIdEnrollmentsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfEnrollmentDto> {
         const response = await this.coursesCourseIdEnrollmentsPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for coursesGet without sending the request
+     */
+    async coursesGetRequestOpts(requestParameters: CoursesGetRequest): Promise<runtime.RequestOpts> {
+        const queryParameters: any = {};
+
+        if (requestParameters['title'] != null) {
+            queryParameters['title'] = requestParameters['title'];
+        }
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['pageSize'] != null) {
+            queryParameters['pageSize'] = requestParameters['pageSize'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/Courses`;
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     */
+    async coursesGetRaw(requestParameters: CoursesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfCourseCatalogPageDto>> {
+        const requestOptions = await this.coursesGetRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfCourseCatalogPageDtoFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async coursesGet(requestParameters: CoursesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfCourseCatalogPageDto> {
+        const response = await this.coursesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateCourseRequestCategoryIdsInner } from './CreateCourseRequestCategoryIdsInner';
+import type { CourseCatalogPageDtoPage } from './CourseCatalogPageDtoPage';
 import {
-    CreateCourseRequestCategoryIdsInnerFromJSON,
-    CreateCourseRequestCategoryIdsInnerFromJSONTyped,
-    CreateCourseRequestCategoryIdsInnerToJSON,
-    CreateCourseRequestCategoryIdsInnerToJSONTyped,
-} from './CreateCourseRequestCategoryIdsInner';
+    CourseCatalogPageDtoPageFromJSON,
+    CourseCatalogPageDtoPageFromJSONTyped,
+    CourseCatalogPageDtoPageToJSON,
+    CourseCatalogPageDtoPageToJSONTyped,
+} from './CourseCatalogPageDtoPage';
 
 /**
  * 
@@ -42,7 +42,7 @@ export interface CreateLessonRequest {
     /**
      * 
      */
-    order: CreateCourseRequestCategoryIdsInner;
+    order: CourseCatalogPageDtoPage;
 }
 
 /**
@@ -69,7 +69,7 @@ export function CreateLessonRequestFromJSONTyped(json: any, ignoreDiscriminator:
         'title': json['title'],
         'description': json['description'],
         'content': json['content'],
-        'order': CreateCourseRequestCategoryIdsInnerFromJSON(json['order']),
+        'order': CourseCatalogPageDtoPageFromJSON(json['order']),
     };
 }
 
@@ -87,7 +87,7 @@ export function CreateLessonRequestToJSONTyped(value?: CreateLessonRequest | nul
         'title': value['title'],
         'description': value['description'],
         'content': value['content'],
-        'order': CreateCourseRequestCategoryIdsInnerToJSON(value['order']),
+        'order': CourseCatalogPageDtoPageToJSON(value['order']),
     };
 }
 

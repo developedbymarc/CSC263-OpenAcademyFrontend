@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
 	import LinkButton from "#lib/components/Button/LinkButton.svelte";
-	import type { ICourse, ILesson } from "#lib/types/entities/course.ts";
+	import { EAssetType, type ICourseDetail, type ILessonAssetView, type ILessonView } from "#lib/types/entities/course.ts";
 	import { Carta, Markdown } from "carta-md";
 	import "carta-md/default.css";
 
-	let { course, lesson }: { course: ICourse; lesson: ILesson } = $props();
+	let { course, lesson, assets = [] }: { course: ICourseDetail; lesson: ILessonView; assets?: ILessonAssetView[] } = $props();
 
 	const carta = new Carta();
 	const href = (lessonId: string) =>
@@ -31,6 +31,19 @@
 		</div>
 	{:else}
 		<p class="clr-muted">This lesson has no content yet.</p>
+	{/if}
+
+	{#if assets.length > 0}
+		<section class="flex flex-direction-column gap-1" aria-label="Lesson media">
+			{#each assets as asset (asset.id)}
+				{#if asset.type === EAssetType.Video}
+					<!-- svelte-ignore a11y_media_has_caption -->
+					<video src={asset.url} controls preload="metadata"></video>
+				{:else}
+					<img src={asset.url} alt="{lesson.title} - illustration" />
+				{/if}
+			{/each}
+		</section>
 	{/if}
 
 	<footer class="flex justify-content-space-between">

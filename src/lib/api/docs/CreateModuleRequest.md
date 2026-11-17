@@ -8,7 +8,7 @@ Name | Type
 ------------ | -------------
 `title` | string
 `description` | string
-`order` | [CreateCourseRequestCategoryIdsInner](CreateCourseRequestCategoryIdsInner.md)
+`order` | [CourseCatalogPageDtoPage](CourseCatalogPageDtoPage.md)
 
 ## Example
 

@@ -78,3 +78,16 @@ export const CourseSchema: ObjectSchema<IPureCourse> = object().shape({
     description: string().min(1).max(64).required(),
     modules: array().of(ModuleSchema).default([])
 });
+
+// Explore / search (validated from the URL query string)
+
+export const PAGE_SIZES = [6, 12, 24, 48] as const;
+export const SORT_OPTIONS = ["relevance", "title-asc", "title-desc"] as const;
+export type ISearchData = InferType<typeof SearchSchema>;
+export const SearchSchema = object({
+    title: string().trim().max(128).default(""),
+    category: string().trim().max(64).default(""),
+    page: number().integer().min(1).default(1),
+    pageSize: number().integer().oneOf([...PAGE_SIZES]).default(12),
+    sort: string().oneOf([...SORT_OPTIONS]).default("relevance"),
+});

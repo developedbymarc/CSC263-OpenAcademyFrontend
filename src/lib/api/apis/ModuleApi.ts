@@ -14,6 +14,11 @@
 
 import * as runtime from '../runtime';
 import {
+    type ApiResponseOfIReadOnlyListOfModuleDto,
+    ApiResponseOfIReadOnlyListOfModuleDtoFromJSON,
+    ApiResponseOfIReadOnlyListOfModuleDtoToJSON,
+} from '../models/ApiResponseOfIReadOnlyListOfModuleDto';
+import {
     type ApiResponseOfModuleDto,
     ApiResponseOfModuleDtoFromJSON,
     ApiResponseOfModuleDtoToJSON,
@@ -24,7 +29,25 @@ import {
     CreateModuleRequestToJSON,
 } from '../models/CreateModuleRequest';
 
-export interface ApiCoursesCourseIdModulesPostRequest {
+export interface CoursesCourseIdModulesGetRequest {
+    /**
+     * 
+     */
+    courseId: string;
+}
+
+export interface CoursesCourseIdModulesModuleIdGetRequest {
+    /**
+     * 
+     */
+    courseId: string;
+    /**
+     * 
+     */
+    moduleId: string;
+}
+
+export interface CoursesCourseIdModulesPostRequest {
     /**
      * 
      */
@@ -41,20 +64,114 @@ export interface ApiCoursesCourseIdModulesPostRequest {
 export class ModuleApi extends runtime.BaseAPI {
 
     /**
-     * Creates request options for apiCoursesCourseIdModulesPost without sending the request
+     * Creates request options for coursesCourseIdModulesGet without sending the request
      */
-    async apiCoursesCourseIdModulesPostRequestOpts(requestParameters: ApiCoursesCourseIdModulesPostRequest): Promise<runtime.RequestOpts> {
+    async coursesCourseIdModulesGetRequestOpts(requestParameters: CoursesCourseIdModulesGetRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['courseId'] == null) {
             throw new runtime.RequiredError(
                 'courseId',
-                'Required parameter "courseId" was null or undefined when calling apiCoursesCourseIdModulesPost().'
+                'Required parameter "courseId" was null or undefined when calling coursesCourseIdModulesGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/Courses/{courseId}/Modules`;
+        urlPath = urlPath.replace('{courseId}', encodeURIComponent(String(requestParameters['courseId'])));
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     */
+    async coursesCourseIdModulesGetRaw(requestParameters: CoursesCourseIdModulesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfIReadOnlyListOfModuleDto>> {
+        const requestOptions = await this.coursesCourseIdModulesGetRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfIReadOnlyListOfModuleDtoFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async coursesCourseIdModulesGet(requestParameters: CoursesCourseIdModulesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfIReadOnlyListOfModuleDto> {
+        const response = await this.coursesCourseIdModulesGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for coursesCourseIdModulesModuleIdGet without sending the request
+     */
+    async coursesCourseIdModulesModuleIdGetRequestOpts(requestParameters: CoursesCourseIdModulesModuleIdGetRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['courseId'] == null) {
+            throw new runtime.RequiredError(
+                'courseId',
+                'Required parameter "courseId" was null or undefined when calling coursesCourseIdModulesModuleIdGet().'
+            );
+        }
+
+        if (requestParameters['moduleId'] == null) {
+            throw new runtime.RequiredError(
+                'moduleId',
+                'Required parameter "moduleId" was null or undefined when calling coursesCourseIdModulesModuleIdGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/Courses/{courseId}/Modules/{moduleId}`;
+        urlPath = urlPath.replace('{courseId}', encodeURIComponent(String(requestParameters['courseId'])));
+        urlPath = urlPath.replace('{moduleId}', encodeURIComponent(String(requestParameters['moduleId'])));
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     */
+    async coursesCourseIdModulesModuleIdGetRaw(requestParameters: CoursesCourseIdModulesModuleIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfModuleDto>> {
+        const requestOptions = await this.coursesCourseIdModulesModuleIdGetRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfModuleDtoFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async coursesCourseIdModulesModuleIdGet(requestParameters: CoursesCourseIdModulesModuleIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfModuleDto> {
+        const response = await this.coursesCourseIdModulesModuleIdGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for coursesCourseIdModulesPost without sending the request
+     */
+    async coursesCourseIdModulesPostRequestOpts(requestParameters: CoursesCourseIdModulesPostRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['courseId'] == null) {
+            throw new runtime.RequiredError(
+                'courseId',
+                'Required parameter "courseId" was null or undefined when calling coursesCourseIdModulesPost().'
             );
         }
 
         if (requestParameters['createModuleRequest'] == null) {
             throw new runtime.RequiredError(
                 'createModuleRequest',
-                'Required parameter "createModuleRequest" was null or undefined when calling apiCoursesCourseIdModulesPost().'
+                'Required parameter "createModuleRequest" was null or undefined when calling coursesCourseIdModulesPost().'
             );
         }
 
@@ -65,7 +182,7 @@ export class ModuleApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/api/courses/{courseId}/modules`;
+        let urlPath = `/Courses/{courseId}/Modules`;
         urlPath = urlPath.replace('{courseId}', encodeURIComponent(String(requestParameters['courseId'])));
 
         return {
@@ -79,8 +196,8 @@ export class ModuleApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiCoursesCourseIdModulesPostRaw(requestParameters: ApiCoursesCourseIdModulesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfModuleDto>> {
-        const requestOptions = await this.apiCoursesCourseIdModulesPostRequestOpts(requestParameters);
+    async coursesCourseIdModulesPostRaw(requestParameters: CoursesCourseIdModulesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiResponseOfModuleDto>> {
+        const requestOptions = await this.coursesCourseIdModulesPostRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ApiResponseOfModuleDtoFromJSON(jsonValue));
@@ -88,8 +205,8 @@ export class ModuleApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiCoursesCourseIdModulesPost(requestParameters: ApiCoursesCourseIdModulesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfModuleDto> {
-        const response = await this.apiCoursesCourseIdModulesPostRaw(requestParameters, initOverrides);
+    async coursesCourseIdModulesPost(requestParameters: CoursesCourseIdModulesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiResponseOfModuleDto> {
+        const response = await this.coursesCourseIdModulesPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
