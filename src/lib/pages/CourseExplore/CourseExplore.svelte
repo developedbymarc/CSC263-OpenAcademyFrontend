@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import Button from "#lib/components/Button/Button.svelte";
+	import LinkButton from "#lib/components/Button/LinkButton.svelte";
+	import { resolve } from "$app/paths";
 	import type { ICourse } from "#lib/types/entities/course.ts";
 	import { humanizeDate } from "#lib/utils/utils.ts";
 	import { untrack } from "svelte";
@@ -22,9 +24,14 @@
                 { data.course.title }
                 <span class="clr-muted fs1"><i> - Last updated: { humanizeDate(data.course.updatedAt) }</i></span>
             </h2>
-            <form method="POST" action="?/enroll" use:enhance>
-                <Button type="submit" disabled={form?.enrolled}>{form?.enrolled ? "Enrolled" : "Enroll"}</Button>
-            </form>
+            <div class="flex align-items-center gap-1">
+                {#if form?.enrolled}
+                    <LinkButton href={resolve("/(private)/courses/[courseId]", { courseId: data.course.id })}>Start learning</LinkButton>
+                {/if}
+                <form method="POST" action="?/enroll" use:enhance>
+                    <Button type="submit" disabled={form?.enrolled}>{form?.enrolled ? "Enrolled" : "Enroll"}</Button>
+                </form>
+            </div>
         </div>
         {#if form?.enrollError}<p class="clr-error">{form.enrollError}</p>{/if}
         <article>{ data.course.description }</article>

@@ -16,7 +16,7 @@ a:not(.button, .card) {
     &:hover,
     &:focus-visible {
         color: var(--accent);
-        text-decoration: var(--linkUnderlineThickness) solid underline;
+        // text-decoration: var(--linkUnderlineThickness) solid underline;
     }
 }
 
@@ -114,6 +114,9 @@ $fontSizes: (
 
         // Dashboard
         --dashboardGridColumns: 18% auto;
+
+        // Course view (aside + content)
+        --courseViewGridColumns: 24% auto;
 
         // Course Explore
         --courseExploreContainerMaxWidth: 1440px;

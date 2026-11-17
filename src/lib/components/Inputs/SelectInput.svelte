@@ -18,7 +18,7 @@
         ...rest }: SelectInputProps = $props();
 
     $effect(() => {
-        untrack(() => value = options[0])
+        untrack(() => { if (!value || !options.includes(value)) value = options[0]; })
     })
 </script>
 

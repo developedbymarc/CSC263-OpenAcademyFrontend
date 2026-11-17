@@ -26,7 +26,7 @@ export const mockData: IMockData = {
                         {
                             id: "0",
                             moduleId: "0",
-                            content: "",
+                            content: "## Add and subtract within 20\n\nWelcome! In this lesson we practice adding and subtracting small numbers.\n\n### Quick tips\n\n- Start from the bigger number when adding\n- Use a number line to count backwards when subtracting\n- Check your answer by doing the opposite operation\n\n> `7 + 5 = 12`, so `12 - 5 = 7`",
                             lessonAssets: [],
                             title: "Add and subtract within 20: FAQ",
                             description: "Frequently asked questions about adding  and subtracting within 20.",
@@ -38,15 +38,15 @@ export const mockData: IMockData = {
                 },
                 {
                     id: "1",
-                    courseId: "1",
-                    order: 0,
+                    courseId: "0",
+                    order: 1,
                     title: "Module 2: Multiply and Divide within 20",
                     description: "In this unit, we'll learn how to multiply and divide small numbers in a fun and interactive way, develop confidence with these basic math skills, and build a strong foundation for future learning.",
                     lessons: [
                         {
-                            id: "0",
-                            moduleId: "2",
-                            content: "",
+                            id: "1",
+                            moduleId: "1",
+                            content: "## Multiply and divide within 20\n\nMultiplication is repeated addition: `3 x 4` means *three groups of four*.\n\n1. Draw 3 groups\n2. Put 4 dots in each\n3. Count them all: **12**\n\nDivision is the reverse: share 12 dots equally between 3 groups and you get 4 in each.",
                             lessonAssets: [],
                             title: "Multiply and divide within 20: FAQ",
                             description: "Frequently asked questions about multiplying and dividing within 20.",

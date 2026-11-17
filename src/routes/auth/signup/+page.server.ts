@@ -4,9 +4,13 @@ import { fail, redirect } from '@sveltejs/kit';
 import { yup } from 'sveltekit-superforms/adapters';
 import { applyApiError, call } from '#lib/server/api.ts';
 import { ROLE_TO_API } from '#lib/server/auth-utils.ts';
+import { EUserRole } from '#lib/types/entities/user.ts';
 
-export const load = async () => {
-  const form = await superValidate<ISignUpData>(yup(SignUpSchema));
+export const load = async ({ url }) => {
+  // The landing page links here with ?role=student|teacher so the role is already selected.
+  const role = url.searchParams.get('role');
+  const initial = Object.values(EUserRole).find((r) => r === role);
+  const form = await superValidate<ISignUpData>(initial ? { role: initial } : null, yup(SignUpSchema), { errors: false });
   return { form };
 };
 
