@@ -187,7 +187,9 @@ class RawApi extends BaseAPI {
  * Creates the SDK clients for one incoming request. Forwards the browser's cookies to the backend,
  * relays the backend's Set-Cookie headers back to the browser, and attaches the CSRF header to mutating calls.
  */
-export function createApi(event: Pick<RequestEvent, 'request' | 'cookies' | 'fetch'>) {
+export function createApi(
+	event: Pick<RequestEvent, 'request' | 'cookies' | 'fetch' | 'getClientAddress'>
+) {
 	const jar = new Map<string, string>();
 	for (const part of (event.request.headers.get('cookie') ?? '').split(';')) {
 		const i = part.indexOf('=');
@@ -204,10 +206,17 @@ export function createApi(event: Pick<RequestEvent, 'request' | 'cookies' | 'fet
 				if (csrf) headers.set(CSRF_HEADER, csrf);
 			}
 			headers.set('Cookie', [...jar].map(([k, v]) => `${k}=${v}`).join('; '));
+			// The backend only sees plain HTTP from this container: pass on what the visitor used.
+			headers.set('X-Forwarded-Proto', 'https');
+			headers.set('X-Forwarded-For', event.getClientAddress());
 			return { url, init: { ...init, headers } };
 		},
-		async post({ response }) {
-			for (const raw of response.headers.getSetCookie()) {
+		async post({ url, response }) {
+			const setCookies = response.headers.getSetCookie();
+			// The antiforgery token is bound to the user: a new session needs a new token.
+			if (setCookies.length > 0 && !url.includes('/Auth/csrf')) csrf = undefined;
+
+			for (const raw of setCookies) {
 				const c = parseSetCookie(raw);
 				const expired = c.maxAge === 0 || (c.expires && c.expires.getTime() <= Date.now());
 				if (expired) jar.delete(c.name);
