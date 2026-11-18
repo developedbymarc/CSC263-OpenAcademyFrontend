@@ -25,7 +25,10 @@ export const load = async ({ locals }) => {
 		avatarUrl: info?.generalInfo?.avatarUrl ?? null,
 		isInstructor: !!info?.instructorProfile,
 		devices: devices.ok ? (devices.data.data ?? []) : [],
-		loadError: me.ok ? null : me.error.message
+		loadError:
+			[me.ok ? null : me.error.message, devices.ok ? null : devices.error.message]
+				.filter(Boolean)
+				.join(' ') || null
 	};
 };
 
@@ -58,14 +61,19 @@ export const actions = {
 
 	avatar: async ({ request, locals }) => {
 		const file = (await request.formData()).get('avatar');
-		if (!(file instanceof File) || file.size === 0) return fail(400, { error: 'Choose an image first.' });
+		if (!(file instanceof File) || file.size === 0)
+			return fail(400, { error: 'Choose an image first.' });
 		const res = await call(() => locals.api.uploadAvatar(file));
-		return res.ok ? { success: 'Avatar updated.' } : fail(res.error.status || 400, { error: res.error.message });
+		return res.ok
+			? { success: 'Avatar updated.' }
+			: fail(res.error.status || 400, { error: res.error.message });
 	},
 
 	signOutDevice: async ({ request, locals }) => {
 		const id = String((await request.formData()).get('familyId') ?? '');
-		const res = await call(() => locals.api.auth.authSignoutDevicePost({ signOutDeviceDto: { refreshTokenFamilyId: id } }));
+		const res = await call(() =>
+			locals.api.auth.authSignoutDevicePost({ signOutDeviceDto: { refreshTokenFamilyId: id } })
+		);
 		return res.ok ? { success: 'Device signed out.' } : fail(400, { error: res.error.message });
 	},
 
