@@ -10,13 +10,11 @@
 	import Card from '#lib/components/Card/Card.svelte';
 	import Logo from '#lib/components/Logo/Logo.svelte';
 	import FormMessage from '#lib/components/FormMessage/FormMessage.svelte';
-	import { resolve } from '$app/paths';
-	import type { ICourseCreated } from '#lib/types/entities/course.ts';
 
 	let { data } = $props();
 	const { form, constraints, errors, enhance, reset, message, delayed } = superForm<
 		ICourseData,
-		string | ICourseCreated
+		string
 	>(
 		untrack(() => data.form),
 		{
@@ -78,29 +76,7 @@
 		<Button onclick={addModule} type="button" class="button-outline button-flat">Add Module</Button>
 	</div>
 
-	{#if typeof $message === 'object' && $message}
-		<Card accent="accent">
-			<h3>Course created</h3>
-			<p>Review the lessons you created:</p>
-			<ul>
-				{#each $message.lessons as lesson (lesson.id)}
-					<li>
-						<a
-							data-active="true"
-							href={resolve('/(private)/courses/[courseId]/lessons/[lessonId]', {
-								courseId: $message.courseId,
-								lessonId: lesson.id
-							})}
-						>
-							{lesson.title}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</Card>
-	{:else}
-		<FormMessage message={$message as string | undefined} />
-	{/if}
+	<FormMessage message={$message} />
 
 	<div class="flex gap-1 margin-block-start-2 justify-content-space-between">
 		<Button type="submit" disabled={$delayed}>Submit Course</Button>

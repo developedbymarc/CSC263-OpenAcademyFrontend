@@ -18,12 +18,14 @@
 		course,
 		lesson,
 		assets = [],
+		assetsError = null,
 		canUploadAssets = false,
 		form
 	}: {
 		course: ICourseDetail;
 		lesson: ILessonView;
 		assets?: ILessonAssetView[];
+		assetsError?: string | null;
 		canUploadAssets?: boolean;
 		form?: { uploadError?: string; uploadSuccess?: { fileName: string; assetId: string } } | null;
 	} = $props();
@@ -54,6 +56,10 @@
 		</div>
 	{:else}
 		<p class="clr-muted">This lesson has no content yet.</p>
+	{/if}
+
+	{#if assetsError}
+		<p class="clr-muted" role="status">Lesson media could not be loaded: {assetsError}</p>
 	{/if}
 
 	{#if assets.length > 0}

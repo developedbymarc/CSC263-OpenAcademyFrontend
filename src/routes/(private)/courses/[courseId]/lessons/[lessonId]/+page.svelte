@@ -8,6 +8,7 @@
 	course={data.course}
 	lesson={data.lesson}
 	assets={data.assets}
+	assetsError={data.assetsError}
 	canUploadAssets={data.canUploadAssets}
 	{form}
 />

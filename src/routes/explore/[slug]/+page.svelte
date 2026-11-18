@@ -6,7 +6,7 @@
 		data,
 		form
 	}: {
-		data: { course: ICourseDetail; loggedIn: boolean; canEnroll: boolean };
+		data: { course: ICourseDetail; loggedIn: boolean; canEnroll: boolean; hasAccess: boolean };
 		form?: { enrolled?: boolean; enrollError?: string };
 	} = $props();
 </script>

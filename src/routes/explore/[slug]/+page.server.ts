@@ -5,14 +5,21 @@ import { canEnroll } from '#lib/utils/roles.ts';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
-	const res = await getCourse(locals.api, params.slug);
+	// Students who have not enrolled are not allowed to list modules/lessons (403): show the public summary instead.
+	const res = await getCourse(locals.api, params.slug, { allowLockedContent: true });
 	if (!res.ok)
 		error(
 			res.error.status >= 400 && res.error.status < 600 ? res.error.status : 502,
 			res.error.message
 		);
 	if (!res.data) error(404, 'Course not found');
-	return { course: res.data, loggedIn: !!locals.user, canEnroll: canEnroll(locals.user) };
+	return {
+		course: res.data,
+		loggedIn: !!locals.user,
+		canEnroll: canEnroll(locals.user),
+		// The API has no "am I enrolled" endpoint, but if it let us read the content, the user may open it.
+		hasAccess: !!locals.user && !res.data.contentLocked
+	};
 };
 
 export const actions: Actions = {

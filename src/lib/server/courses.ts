@@ -96,13 +96,39 @@ async function findInCatalogue(api: Api, id: string): Promise<CallResult<ICourse
 	return { ok: true, data: null };
 }
 
-export async function getCourse(api: Api, id: string): Promise<CallResult<ICourseDetail | null>> {
+export type GetCourseOptions = {
+	/**
+	 * The module/lesson endpoints are not readable by everyone (a student who has not enrolled gets a 403).
+	 * With this set, a 401/403 on them yields the course summary with `modules: []` and `contentLocked: true`
+	 * instead of an error, which is what the public explore page needs.
+	 */
+	allowLockedContent?: boolean;
+};
+
+const isLockedStatus = (status: number) => status === 401 || status === 403;
+
+export async function getCourse(
+	api: Api,
+	id: string,
+	opts: GetCourseOptions = {}
+): Promise<CallResult<ICourseDetail | null>> {
 	const [summary, mods] = await Promise.all([
 		findInCatalogue(api, id),
 		call(() => api.modules.coursesCourseIdModulesGet({ courseId: id }))
 	]);
 	if (!summary.ok) return summary;
-	if (!mods.ok) return mods.error.status === 404 ? { ok: true, data: null } : mods;
+
+	const locked = (): CallResult<ICourseDetail> | null =>
+		summary.data ? { ok: true, data: { ...summary.data, modules: [], contentLocked: true } } : null;
+
+	if (!mods.ok) {
+		if (mods.error.status === 404) return { ok: true, data: null };
+		if (opts.allowLockedContent && isLockedStatus(mods.error.status)) {
+			const result = locked();
+			if (result) return result;
+		}
+		return mods;
+	}
 	if (!summary.data) return { ok: true, data: null };
 
 	const moduleDtos: ModuleDto[] = mods.data.data ?? [];
@@ -127,9 +153,12 @@ export async function getCourse(api: Api, id: string): Promise<CallResult<ICours
 		})
 	);
 	const failedModule = moduleResults.find((result) => !result.ok);
-	if (failedModule) return failedModule;
+	if (failedModule && !failedModule.ok) {
+		if (opts.allowLockedContent && isLockedStatus(failedModule.error.status)) return locked()!;
+		return failedModule;
+	}
 	const modules = moduleResults.flatMap((result) => (result.ok ? [result.data] : [])).sort(byOrder);
-	return { ok: true, data: { ...summary.data, modules } };
+	return { ok: true, data: { ...summary.data, modules, contentLocked: false } };
 }
 
 /** GET .../Lessons/{lessonId}/Assets */

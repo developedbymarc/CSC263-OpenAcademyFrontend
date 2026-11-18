@@ -9,13 +9,17 @@ export const load: PageServerLoad = async ({ params, parent, locals }) => {
 	const lesson = course.modules.flatMap((m) => m.lessons).find((l) => l.id === params.lessonId);
 	if (!lesson) error(404, 'Lesson not found');
 	// Asset URLs are short-lived signed links, so they are fetched per visit rather than cached with the course.
-	const assets = await getLessonAssets(locals.api, course.id, lesson.moduleId, lesson.id);
-	if (!assets.ok)
-		error(
-			assets.error.status >= 400 && assets.error.status < 600 ? assets.error.status : 502,
-			assets.error.message
-		);
-	return { lesson, assets: assets.data, canUploadAssets: canManageCourses(locals.user) };
+	// Media is optional: a lesson that has none (the endpoint answers 404) or whose media cannot be listed must
+	// still render its text, so a failure here is reported inline instead of turning the whole page into an error.
+	const res = await getLessonAssets(locals.api, course.id, lesson.moduleId, lesson.id);
+	if (!res.ok && res.error.status !== 404)
+		console.warn(`Lesson assets failed (${res.error.status}) for lesson ${lesson.id}: ${res.error.message}`);
+	return {
+		lesson,
+		assets: res.ok ? res.data : [],
+		assetsError: res.ok || res.error.status === 404 ? null : res.error.message,
+		canUploadAssets: canManageCourses(locals.user)
+	};
 };
 
 export const actions: Actions = {
