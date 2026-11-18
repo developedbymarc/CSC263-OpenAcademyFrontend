@@ -6,7 +6,10 @@ import { applyApiError, call } from '#lib/server/api.ts';
 import { ROLE_TO_API } from '#lib/server/auth-utils.ts';
 import { EUserRole } from '#lib/types/entities/user.ts';
 
-export const load = async ({ url }) => {
+export const load = async ({ url, locals }) => {
+  // Logged-in users have no business registering again.
+  if (locals.user) redirect(303, '/dashboard');
+
   // The landing page links here with ?role=student|teacher so the role is already selected.
   const role = url.searchParams.get('role');
   const initial = Object.values(EUserRole).find((r) => r === role);
@@ -16,6 +19,9 @@ export const load = async ({ url }) => {
 
 export const actions = {
   default: async ({ request, locals }) => {
+    // Block direct POSTs too, not just the page.
+    if (locals.user) redirect(303, '/dashboard');
+
     const form = await superValidate(request, yup(SignUpSchema));
     if (!form.valid) return fail(400, { form });
 

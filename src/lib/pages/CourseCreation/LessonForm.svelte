@@ -1,86 +1,103 @@
 <script lang="ts">
-	import Button from "#lib/components/Button/Button.svelte";
-	import TextAreaInput from "#lib/components/Inputs/TextAreaInput.svelte";
-	import TextInput from "#lib/components/Inputs/TextInput.svelte";
-	import type { ICourseData } from "#lib/forms.ts";
-	import type { SuperForm } from "sveltekit-superforms";
+	import Button from '#lib/components/Button/Button.svelte';
+	import TextAreaInput from '#lib/components/Inputs/TextAreaInput.svelte';
+	import TextInput from '#lib/components/Inputs/TextInput.svelte';
+	import type { ICourseData } from '#lib/forms.ts';
+	import type { SuperForm } from 'sveltekit-superforms';
 	import { Carta, MarkdownEditor } from 'carta-md';
-    import 'carta-md/default.css';
+	import { sanitizeMarkdownHtml } from '#lib/utils/markdown.ts';
+	import 'carta-md/default.css';
 
-   	let expand = $state(false);
+	let expand = $state(false);
 
-    const carta = new Carta();
-	let { form, errors, constraints, moduleIdx, idx }: Pick<SuperForm<ICourseData>, "form" | "errors" | "constraints">
-	    & { moduleIdx : number, idx: number } = $props();
+	const carta = new Carta({ sanitizer: sanitizeMarkdownHtml });
+	let {
+		form,
+		errors,
+		constraints,
+		moduleIdx,
+		idx
+	}: Pick<SuperForm<ICourseData>, 'form' | 'errors' | 'constraints'> & {
+		moduleIdx: number;
+		idx: number;
+	} = $props();
 
-	const removeLesson = () => form.update((course) => {
-	    course.modules[moduleIdx].lessons = course.modules[moduleIdx].lessons.filter((x, _idx) => _idx != idx)
-	    return course;
-	});
+	const removeLesson = () =>
+		form.update((course) => {
+			course.modules[moduleIdx].lessons = course.modules[moduleIdx].lessons.filter(
+				(x, _idx) => _idx != idx
+			);
+			return course;
+		});
 </script>
 
 <div class="flex flex-direction-column gap-1">
-    <div class="flex align-items-center justify-content-space-between">
-        <h2>Module {moduleIdx + 1} / Lesson {idx + 1}</h2>
+	<div class="flex align-items-center justify-content-space-between">
+		<h2>Module {moduleIdx + 1} / Lesson {idx + 1}</h2>
 
-        <div class="flex gap-1">
-            <Button onclick={() => expand = !expand} class="button-outline button-flat" type="button" data-accent={expand ? "error" : ""}>
-                { expand ? "Collapse" : "Expand" }
-            </Button>
-            <Button
-                onclick={removeLesson}
-                class="button-outline button-flat"
-                type="button"
-                accent="error"
-            >
-                    Remove
-            </Button>
-        </div>
-    </div>
+		<div class="flex gap-1">
+			<Button
+				onclick={() => (expand = !expand)}
+				class="button-outline button-flat"
+				type="button"
+				data-accent={expand ? 'error' : ''}
+			>
+				{expand ? 'Collapse' : 'Expand'}
+			</Button>
+			<Button
+				onclick={removeLesson}
+				class="button-outline button-flat"
+				type="button"
+				accent="error"
+			>
+				Remove
+			</Button>
+		</div>
+	</div>
 
-    {#if expand}
-        <TextInput
-            {...$constraints?.modules?.title}
-            bind:value={$form.modules[moduleIdx].lessons[idx].title}
-            errors={$errors.modules?.[moduleIdx].lessons?.[idx]?.title}
+	{#if expand}
+		<TextInput
+			{...$constraints?.modules?.title}
+			bind:value={$form.modules[moduleIdx].lessons[idx].title}
+			errors={$errors.modules?.[moduleIdx].lessons?.[idx]?.title}
+			label="Title"
+			placeholder="Enter lesson title"
+			type="text"
+			name="title"
+		/>
+		<TextAreaInput
+			{...$constraints?.modules?.description}
+			bind:value={$form.modules[moduleIdx].lessons[idx].description}
+			errors={$errors.modules?.[moduleIdx].lessons?.[idx]?.description}
+			label="Description"
+			placeholder="Enter lesson description"
+			name="description"
+		/>
 
-            label="Title"
-            placeholder="Enter lesson title"
-            type="text"
-            name="title"
-        />
-        <TextAreaInput
-            {...$constraints?.modules?.description}
-            bind:value={$form.modules[moduleIdx].lessons[idx].description}
-            errors={$errors.modules?.[moduleIdx].lessons?.[idx]?.description}
-
-            label="Description"
-            placeholder="Enter lesson description"
-            name="description"
-        />
-
-        <MarkdownEditor {carta} bind:value={$form.modules[moduleIdx].lessons[idx].content} />
-    {/if}
+		<MarkdownEditor {carta} bind:value={$form.modules[moduleIdx].lessons[idx].content} />
+	{/if}
 </div>
 
 <style>
-    :global(.carta-editor) {
-        --border-color: var(--bgOverlay);
-        --focus-outline: var(--accent);
-        --hover-color: var(--accent);
-        --caret-color: var(--accent);
-        --text-color: var(--text);
+	:global(.carta-editor) {
+		--border-color: var(--bgOverlay);
+		--focus-outline: var(--accent);
+		--hover-color: var(--accent);
+		--caret-color: var(--accent);
+		--text-color: var(--text);
 
-        border-width: var(--globBorderThickness) !important;
-    }
+		border-width: var(--globBorderThickness) !important;
+	}
 
-    :global(.carta-toolbar) { border-width: var(--globBorderThickness) !important; }
-    :global(.carta-font-code) {
-        font-family: inherit;
-        font-size: var(--fs1);
-        color: var(--text) !important;
+	:global(.carta-toolbar) {
+		border-width: var(--globBorderThickness) !important;
+	}
+	:global(.carta-font-code) {
+		font-family: inherit;
+		font-size: var(--fs1);
+		color: var(--text) !important;
 
-        line-height: 1.1rem;
-        letter-spacing: normal;
-    }
+		line-height: 1.1rem;
+		letter-spacing: normal;
+	}
 </style>

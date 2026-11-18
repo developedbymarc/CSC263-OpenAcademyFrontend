@@ -109,6 +109,11 @@ export interface IModuleView {
 /** A course with its full module/lesson tree. */
 export interface ICourseDetail extends ICourseSummary {
     modules: IModuleView[];
+    /**
+     * True when the backend refused to list the modules/lessons for the current user (401/403, e.g. a student who
+     * has not enrolled yet). Only set when the caller asked for `allowLockedContent`; `modules` is then empty.
+     */
+    contentLocked?: boolean;
 }
 
 export interface ICatalogPage {

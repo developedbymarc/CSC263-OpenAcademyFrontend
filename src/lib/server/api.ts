@@ -2,15 +2,27 @@ import { API_BASE_URL } from '$app/env/private';
 import type { RequestEvent } from '@sveltejs/kit';
 import { message, setError, type SuperValidated } from 'sveltekit-superforms';
 import {
-	AdminApi, AuthApi, BaseAPI, Configuration, CoursesApi, LessonApi, LessonAssetsApi,
-	MeApi, ModuleApi, ResponseError, RootApi,
-	type CourseCatalogPageDtoPage, type Middleware
+	AdminApi,
+	AuthApi,
+	BaseAPI,
+	Configuration,
+	CoursesApi,
+	LessonApi,
+	LessonAssetsApi,
+	MeApi,
+	ModuleApi,
+	ResponseError,
+	RootApi,
+	type CourseCatalogPageDtoPage,
+	type Middleware
 } from '#lib/api/index.ts';
+import { ApiResponseOfLessonAssetDtoFromJSON } from '#lib/api/models/ApiResponseOfLessonAssetDto.ts';
 
 /** Name of the antiforgery header the backend expects (ASP.NET default is "X-CSRF-TOKEN"). */
 const CSRF_HEADER = 'X-CSRF-TOKEN';
 /** Multipart field name of the avatar upload. The generated MeApi.meAvatarPut() cannot send a file (see note in README). */
 const AVATAR_FIELD = 'file';
+const LESSON_ASSET_FIELD = 'File';
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
 
 /**
@@ -21,7 +33,8 @@ export type ApiInt = CourseCatalogPageDtoPage;
 /** number -> generated `{}` int type (for request bodies / query params). */
 export const toInt = (x: number) => x as unknown as ApiInt;
 /** generated `{}` int type -> number (for response values). */
-export const fromInt = (x: ApiInt | null | undefined, fallback = 0) => (typeof x === 'number' ? x : Number(x ?? fallback));
+export const fromInt = (x: ApiInt | null | undefined, fallback = 0) =>
+	typeof x === 'number' ? x : Number(x ?? fallback);
 
 // ---------- errors ----------
 
@@ -39,11 +52,25 @@ async function toFailure(e: unknown): Promise<ApiFailure> {
 		try {
 			const body = await e.response.clone().json();
 			const err = body?.error ?? body;
-			if (err?.message) return { status, code: err.code ?? String(status), message: err.message, details: err.details };
+			if (err?.message)
+				return {
+					status,
+					code: err.code ?? String(status),
+					message: err.message,
+					details: err.details
+				};
 			// ASP.NET ProblemDetails / validation problem
-			if (body?.errors) return { status, code: 'validation', message: body.title ?? 'Validation failed', details: body.errors };
+			if (body?.errors)
+				return {
+					status,
+					code: 'validation',
+					message: body.title ?? 'Validation failed',
+					details: body.errors
+				};
 			if (body?.title) return { status, code: String(status), message: body.title };
-		} catch { /* not JSON */ }
+		} catch {
+			/* not JSON */
+		}
 		return { status, code: String(status), message: e.response.statusText || 'Request failed' };
 	}
 	return { status: 0, code: 'network', message: 'Could not reach the server' };
@@ -53,9 +80,20 @@ async function toFailure(e: unknown): Promise<ApiFailure> {
 export async function call<T>(fn: () => Promise<T>): Promise<CallResult<T>> {
 	try {
 		const data = await fn();
-		const envl = data as { success?: boolean; error?: { code?: string; message?: string; details?: Record<string, string[]> } | null };
+		const envl = data as {
+			success?: boolean;
+			error?: { code?: string; message?: string; details?: Record<string, string[]> } | null;
+		};
 		if (envl && typeof envl === 'object' && envl.success === false) {
-			return { ok: false, error: { status: 400, code: envl.error?.code ?? 'error', message: envl.error?.message ?? 'Request failed', details: envl.error?.details } };
+			return {
+				ok: false,
+				error: {
+					status: 400,
+					code: envl.error?.code ?? 'error',
+					message: envl.error?.message ?? 'Request failed',
+					details: envl.error?.details
+				}
+			};
 		}
 		return { ok: true, data };
 	} catch (e) {
@@ -64,34 +102,69 @@ export async function call<T>(fn: () => Promise<T>): Promise<CallResult<T>> {
 }
 
 /** Maps an API failure onto a superform: per-field errors when `details` match, otherwise a form message. */
-export function applyApiError<T extends Record<string, unknown>>(form: SuperValidated<T, any, any>, error: ApiFailure) {
+export function applyApiError<T extends Record<string, unknown>>(
+	form: SuperValidated<T>,
+	error: ApiFailure
+) {
 	const fields = Object.keys(form.data);
 	let result: ReturnType<typeof setError> | undefined;
 	for (const [key, msgs] of Object.entries(error.details ?? {})) {
 		const field = fields.find((f) => f.toLowerCase() === key.toLowerCase());
 		if (field) result = setError(form, field as never, msgs);
 	}
-	return result ?? message(form, error.message as never, { status: error.status >= 400 && error.status < 600 ? (error.status as 400) : 400 });
+	return (
+		result ??
+		message(form, error.message as never, {
+			status: error.status >= 400 && error.status < 600 ? (error.status as 400) : 400
+		})
+	);
 }
 
 // ---------- cookies ----------
 
-type ParsedCookie = { name: string; value: string; path: string; httpOnly: boolean; secure: boolean; sameSite?: 'lax' | 'strict' | 'none'; maxAge?: number; expires?: Date };
+type ParsedCookie = {
+	name: string;
+	value: string;
+	path: string;
+	httpOnly: boolean;
+	secure: boolean;
+	sameSite?: 'lax' | 'strict' | 'none';
+	maxAge?: number;
+	expires?: Date;
+};
 
 function parseSetCookie(header: string): ParsedCookie {
 	const [pair, ...attrs] = header.split(';').map((s) => s.trim());
 	const eq = pair.indexOf('=');
-	const c: ParsedCookie = { name: pair.slice(0, eq), value: pair.slice(eq + 1), path: '/', httpOnly: false, secure: false };
+	const c: ParsedCookie = {
+		name: pair.slice(0, eq),
+		value: pair.slice(eq + 1),
+		path: '/',
+		httpOnly: false,
+		secure: false
+	};
 	for (const a of attrs) {
 		const [k, ...v] = a.split('=');
 		const val = v.join('=');
 		switch (k.toLowerCase()) {
-			case 'path': c.path = val || '/'; break;
-			case 'httponly': c.httpOnly = true; break;
-			case 'secure': c.secure = true; break;
-			case 'samesite': c.sameSite = val.toLowerCase() as ParsedCookie['sameSite']; break;
-			case 'max-age': c.maxAge = Number(val); break;
-			case 'expires': c.expires = new Date(val); break;
+			case 'path':
+				c.path = val || '/';
+				break;
+			case 'httponly':
+				c.httpOnly = true;
+				break;
+			case 'secure':
+				c.secure = true;
+				break;
+			case 'samesite':
+				c.sameSite = val.toLowerCase() as ParsedCookie['sameSite'];
+				break;
+			case 'max-age':
+				c.maxAge = Number(val);
+				break;
+			case 'expires':
+				c.expires = new Date(val);
+				break;
 		}
 	}
 	return c;
@@ -99,10 +172,14 @@ function parseSetCookie(header: string): ParsedCookie {
 
 // ---------- api factory ----------
 
-/** Used only to expose BaseAPI.request() for the one endpoint the generator got wrong. */
+/** Used only for multipart endpoints the generated client serializes incorrectly. */
 class RawApi extends BaseAPI {
 	put(path: string, body: FormData) {
 		return this.request({ path, method: 'PUT', headers: {}, body });
+	}
+
+	post(path: string, body: FormData) {
+		return this.request({ path, method: 'POST', headers: {}, body });
 	}
 }
 
@@ -138,8 +215,13 @@ export function createApi(event: Pick<RequestEvent, 'request' | 'cookies' | 'fet
 				// Re-emit with the backend's own attributes (an expired cookie stays expired). event.cookies.delete()
 				// would use SvelteKit's defaults and the browser may ignore it if Secure/SameSite/prefix differ.
 				event.cookies.set(c.name, expired ? '' : c.value, {
-					path: c.path, httpOnly: c.httpOnly, secure: c.secure, sameSite: c.sameSite,
-					maxAge: expired ? 0 : c.maxAge, expires: expired ? new Date(0) : c.expires, encode: (v) => v
+					path: c.path,
+					httpOnly: c.httpOnly,
+					secure: c.secure,
+					sameSite: c.sameSite,
+					maxAge: expired ? 0 : c.maxAge,
+					expires: expired ? new Date(0) : c.expires,
+					encode: (v) => v
 				});
 			}
 		}
@@ -166,13 +248,21 @@ export function createApi(event: Pick<RequestEvent, 'request' | 'cookies' | 'fet
 			const body = new FormData();
 			body.append(AVATAR_FIELD, file, file.name);
 			return new RawApi(config).put('/Me/avatar', body);
+		},
+		/** POST lesson media as multipart; the generated methods incorrectly serialize File as a form URL value. */
+		uploadLessonAsset: async (
+			courseId: string,
+			moduleId: string,
+			lessonId: string,
+			file: File,
+			kind: 'images' | 'videos'
+		) => {
+			const body = new FormData();
+			body.append(LESSON_ASSET_FIELD, file, file.name);
+			const path = `/Courses/${encodeURIComponent(courseId)}/Modules/${encodeURIComponent(moduleId)}/Lessons/${encodeURIComponent(lessonId)}/Assets/${kind}`;
+			const response = await new RawApi(config).post(path, body);
+			return ApiResponseOfLessonAssetDtoFromJSON(await response.json());
 		}
 	};
 }
 export type Api = ReturnType<typeof createApi>;
-
-// ---------- roles ----------
-
-export const roleOf = (u: { role: string } | null | undefined) => u?.role?.toLowerCase() ?? '';
-export const isAdminOrRoot = (u: { role: string } | null | undefined) => ['admin', 'root'].includes(roleOf(u));
-export const isRoot = (u: { role: string } | null | undefined) => roleOf(u) === 'root';
